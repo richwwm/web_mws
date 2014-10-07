@@ -32,7 +32,7 @@ namespace LabelPrintingInterface.Reports
 
                 if (this.ListView1.Items.Count == 0)
                 {
-                    this.ObjectDataSource1.FilterExpression = "[Product Name] LIKE " + "'%" + sKeyWord + "%'";
+                    this.ObjectDataSource1.FilterExpression = "SellerSKU LIKE " + "'%" + sKeyWord + "%'";
                     this.ObjectDataSource1.Select();
                     this.ListView1.DataSource = this.ObjectDataSource1;
 

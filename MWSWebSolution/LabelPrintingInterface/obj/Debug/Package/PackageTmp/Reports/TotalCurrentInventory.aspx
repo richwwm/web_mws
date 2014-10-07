@@ -23,10 +23,10 @@
                 <thead>
                     <tr id="Tr1" runat="server" style="background-color: #81DAF5">
                         <th id="Th1" runat="server">
-                            SKU
+                            FNSKU
                         </th>
                         <th id="Th2" runat="server">
-                            Product Name
+                            SellerSKU
                         </th>
                         <th id="Th3" runat="server">
                             Product Cost (RMB)
@@ -77,10 +77,10 @@
         <ItemTemplate>
             <tr id="Tr2" runat="server">
                 <td valign="top">
-                    <asp:Label ID="SellerSKULabel" runat="Server" Text='<%#Eval("FNSKU") %>' />
+                    <asp:Label ID="FNSKULabel" runat="Server" Text='<%#Eval("FNSKU") %>' />
                 </td>
                 <td>
-                    <asp:Label ID="ProductNameLabel" runat="Server" Text='<%#Eval("Product Name") %>'
+                    <asp:Label ID="SellerSKULabel" runat="Server" Text='<%#Eval("SellerSKU") %>'
                         Width="300px" />
                 </td>
                 <td align="right">
@@ -106,10 +106,10 @@
         <AlternatingItemTemplate>
             <tr style="background-color: #EFEFEF">
                 <td valign="top">
-                    <asp:Label ID="SellerSKULabel" runat="Server" Text='<%#Eval("FNSKU") %>' />
+                    <asp:Label ID="FNSKULabel" runat="Server" Text='<%#Eval("FNSKU") %>' />
                 </td>
                 <td>
-                    <asp:Label ID="ProductNameLabel" runat="Server" Text='<%#Eval("Product Name") %>'
+                    <asp:Label ID="SellerSKULabel" runat="Server" Text='<%#Eval("SellerSKU") %>'
                         Width="300px" />
                 </td>
                 <td align="right">
