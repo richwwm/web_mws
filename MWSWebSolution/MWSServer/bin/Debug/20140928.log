@@ -1,8 +1,0 @@
-2014-09-28 18:19:48; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-28 20:48:06; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-28 20:48:18; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-28 21:19:41; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-28 21:20:20; Class Name=SqlDataHandler.cs    Desc=UpdateData() exception message: Column 'InStock' does not belong to table Table1.
-2014-09-28 21:25:02; Class Name=SqlDataHandler.cs    Desc=UpdateData() exception message: Incorrect syntax near ','.
-2014-09-28 21:33:04; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-28 21:35:25; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;

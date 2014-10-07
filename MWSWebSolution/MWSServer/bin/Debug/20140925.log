@@ -1,44 +1,0 @@
-2014-09-25 21:12:31; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-25 21:13:57; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-25 21:20:26; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-25 21:23:04; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-25 21:24:41; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-25 21:30:49; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-25 21:45:25; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-25 22:01:41; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-25 22:04:32; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-25 22:05:22; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:07:05; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-25 22:07:51; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:09:53; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:11:36; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:13:18; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:15:01; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:18:06; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:19:48; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:21:30; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:23:33; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:25:16; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:26:58; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:28:41; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:30:24; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:32:06; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:33:48; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:35:31; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:37:34; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:39:17; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:40:59; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:42:41; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:44:24; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:46:06; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:49:11; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:51:14; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:52:57; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:54:39; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:56:21; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 22:58:04; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 23:01:29; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 23:17:32; Class Name=Main.cs    Desc=InvokeGetReportRequestList() report[0] request status  = _CANCELLED_
-2014-09-25 23:20:57; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-25 23:25:42; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
-2014-09-25 23:29:50; Class Name=Main.cs    Desc=Main() connectionString = Data Source=.\SQLEXPRESS;AttachDbFilename=D:\Richard\progarm_src\mws\mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf;Integrated Security=True;User Instance=True;
