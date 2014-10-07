@@ -1,0 +1,9 @@
+D:\Richard\mws\MWSWebSolution\MarketplaceWebService\bin\Debug\MarketplaceWebService.dll
+D:\Richard\mws\MWSWebSolution\MarketplaceWebService\bin\Debug\MarketplaceWebService.pdb
+D:\Richard\mws\MWSWebSolution\MarketplaceWebService\obj\Debug\ResolveAssemblyReference.cache
+D:\Richard\mws\MWSWebSolution\MarketplaceWebService\obj\Debug\MarketplaceWebService.dll
+D:\Richard\mws\MWSWebSolution\MarketplaceWebService\obj\Debug\MarketplaceWebService.pdb
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService\bin\Debug\MarketplaceWebService.dll
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService\bin\Debug\MarketplaceWebService.pdb
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService\obj\Debug\MarketplaceWebService.dll
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService\obj\Debug\MarketplaceWebService.pdb

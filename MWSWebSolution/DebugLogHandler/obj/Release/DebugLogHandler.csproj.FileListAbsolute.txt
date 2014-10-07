@@ -1,0 +1,4 @@
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\DebugLogHandler\bin\Release\DebugLogHandler.dll
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\DebugLogHandler\bin\Release\DebugLogHandler.pdb
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\DebugLogHandler\obj\Release\DebugLogHandler.dll
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\DebugLogHandler\obj\Release\DebugLogHandler.pdb

@@ -1,0 +1,14 @@
+D:\mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Release\MarketplaceWebService.Samples.exe
+D:\mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Release\MarketplaceWebService.Samples.pdb
+D:\mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Release\MarketplaceWebService.dll
+D:\mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Release\MarketplaceWebService.pdb
+D:\mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Release\MarketplaceWebService.Samples.csprojResolveAssemblyReference.cache
+D:\mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Release\MarketplaceWebService.Samples.exe
+D:\mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Release\MarketplaceWebService.Samples.pdb
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Release\MarketplaceWebService.Samples.exe
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Release\MarketplaceWebService.Samples.pdb
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Release\MarketplaceWebService.dll
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Release\MarketplaceWebService.pdb
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Release\MarketplaceWebService.Samples.csprojResolveAssemblyReference.cache
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Release\MarketplaceWebService.Samples.exe
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Release\MarketplaceWebService.Samples.pdb

@@ -1,0 +1,7 @@
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.Samples.exe
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.Samples.pdb
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.dll
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.pdb
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.exe
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.pdb
+D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.csprojResolveAssemblyReference.cache

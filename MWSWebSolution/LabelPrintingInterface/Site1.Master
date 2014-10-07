@@ -1,0 +1,63 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="LabelPrintingInterface.Site1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <script language="javascript" type="text/javascript">
+        function alertMe() {
+            alert('Hello');
+        }
+        function runNotepad() {
+            // Instantiate the Shell object and invoke its execute method.
+            var oShell = new ActiveXObject("WScript.shell");
+
+            var commandtoRun = "C:\\Program Files (x86)\\Notepad++\\notepad++.exe";
+            if (inputparms != "") {
+                var commandParms = document.Form1.filename.value;
+            }
+
+            // Invoke the execute method.  
+            oShell.ShellExecute(commandtoRun, commandParms, "", "open", "1");
+            //var shell = new ActiveXObject("WScript.shell");
+
+           // var res = shell.run('"C:\\Program Files (x86)\\Notepad++\\notepad++.exe"');
+        }
+    </script>
+    <form id="form1" runat="server">
+    <div align="center">
+        <h1>
+            Amazon Web Management System
+        </h1>
+        <h5>
+            <asp:Menu ID="Menu1" runat="server" BackColor="#B5C7DE" DynamicHorizontalOffset="2"
+                Font-Names="Verdana" Font-Size="Medium" ForeColor="#284E98" Orientation="Horizontal"
+                StaticSubMenuIndent="10px">
+                <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                <DynamicHoverStyle BackColor="#284E98" ForeColor="White" />
+                <DynamicMenuStyle BackColor="#B5C7DE" />
+                <StaticSelectedStyle BackColor="#507CD1" />
+                <DynamicSelectedStyle BackColor="#507CD1" />
+                <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                <Items>
+                    <asp:MenuItem Text="Product" Value="Product" NavigateUrl="~/ProductList.aspx"></asp:MenuItem>
+                    <asp:MenuItem Text="Reports" Value="Reports" NavigateUrl="~/Main.aspx">
+                        <asp:MenuItem NavigateUrl="~/Reports/TotalCurrentInventory.aspx" 
+                            Text="Total Current Inventory Value" Value="Total Current Inventory Value">
+                        </asp:MenuItem>
+                    </asp:MenuItem>
+                    <asp:MenuItem Text="Logout" Value="Logout" NavigateUrl="~/Main.aspx"></asp:MenuItem>
+                </Items>
+                <StaticHoverStyle BackColor="#284E98" ForeColor="White" />
+            </asp:Menu>
+        </h5>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

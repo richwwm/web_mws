@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MWSServer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TimeZone" Type="System.String" Scope="User">
+      <Value Profile="(Default)">US</Value>
+    </Setting>
+    <Setting Name="US_ServiceURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://mws.amazonservices.com/FulfillmentInventory/2010-10-01/</Value>
+    </Setting>
+    <Setting Name="UK_ServiceURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://mws.amazonservices.co.uk/FulfillmentInventory/2010-10-01/</Value>
+    </Setting>
+    <Setting Name="MWS_ServiceURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://mws.amazonservices.com/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
