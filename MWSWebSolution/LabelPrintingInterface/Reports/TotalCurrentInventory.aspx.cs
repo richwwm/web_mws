@@ -10,9 +10,7 @@ namespace LabelPrintingInterface.Reports
 {
     public partial class TotalCurrentInventory : System.Web.UI.Page
     {
-        double dPageTotal = 0;
-        double dPageInboundTotal = 0;
-        double dPageFulfillableTotal = 0;
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,8 +18,6 @@ namespace LabelPrintingInterface.Reports
 
         protected void SearchImageButton1_Click(object sender, ImageClickEventArgs e)
         {
-            if (e.X > 0 && e.Y > 0)
-            {
                 string sKeyWord = this.SearchBox.Text;  //sKeyWord can be ASIN or FNSKU
                 sKeyWord = sKeyWord.Trim();
                 this.ListView1.DataSourceID = null;
@@ -42,7 +38,6 @@ namespace LabelPrintingInterface.Reports
 
                     this.ListView1.DataBind();
                 }
-            }
         }
 
         private string RemoveExtraText(string value)
@@ -51,42 +46,11 @@ namespace LabelPrintingInterface.Reports
             return new string(value.Where(c => allowedChars.Contains(c)).ToArray());
         }
 
-        protected void ListView1_ItemDataBound(object sender, ListViewItemEventArgs e)
-        {
-
-            if (e.Item.ItemType == ListViewItemType.DataItem)
-            {
-                Label CostLabel = e.Item.FindControl("CostLabel") as Label;
-                Label InboundLabel = e.Item.FindControl("InboundLabel") as Label;
-                Label InboundTotalLabel = e.Item.FindControl("InboundTotalLabel") as Label;
-                Label FulfillableLabel = e.Item.FindControl("FulfillableLabel") as Label;
-                Label FulfillableTotalLabel = e.Item.FindControl("FulfillableTotalLabel") as Label;
-                Label SubTotalLabel = e.Item.FindControl("SubTotalLabel") as Label;
-
-                double dCost = Convert.ToDouble(RemoveExtraText(CostLabel.Text));
-                double dInboundTotal = dCost * Convert.ToInt32(InboundLabel.Text);
-                double dFulfillableTotal = dCost * Convert.ToInt32(FulfillableLabel.Text);
-                double dSubTotal = dInboundTotal + dFulfillableTotal;
-
-                dPageTotal += dSubTotal;
-                dPageInboundTotal += dInboundTotal;
-                dPageFulfillableTotal += dFulfillableTotal;
-
-                InboundTotalLabel.Text = dInboundTotal.ToString("C");
-                FulfillableTotalLabel.Text = dFulfillableTotal.ToString("C");
-                SubTotalLabel.Text = dSubTotal.ToString("C");
-            }
-        }
+       
 
         protected void ListView1_PreRender(object sender, EventArgs e)
         {
-            Label totalInboundLbl = (Label)this.ListView1.FindControl("TotalInboundLabel");
-            Label totalFulfillableLbl = (Label)this.ListView1.FindControl("TotalFulfillableLabel");
-            Label totalCountLbl = (Label)this.ListView1.FindControl("TotalCountLabel");
 
-            totalInboundLbl.Text = dPageInboundTotal.ToString("C");
-            totalFulfillableLbl.Text = dPageFulfillableTotal.ToString("C");
-            totalCountLbl.Text = dPageTotal.ToString("C");
         }
 
         protected void MaxiumRecordTextBox_OnTextChanged(object sender, EventArgs e)
@@ -107,6 +71,44 @@ namespace LabelPrintingInterface.Reports
             this.ListView1.DataSourceID = null;
             this.ListView1.DataSource = this.ObjectDataSource1;
             this.ListView1.DataBind();
+
+            double dPageTotal = 0;
+            double dPageInboundTotal = 0;
+            double dPageFulfillableTotal = 0;
+            foreach (ListViewDataItem Item in this.ListView1.Items)
+            {
+                //Label CostLabel = item.FindControl("CostLabel") as Label;
+                //Label InboundLabel = item.FindControl("InboundLabel") as Label;
+                Label InboundTotalLabel = Item.FindControl("InboundTotalLabel") as Label;
+                //Label FulfillableLabel = item.FindControl("FulfillableLabel") as Label;
+                Label FulfillableTotalLabel = Item.FindControl("FulfillableTotalLabel") as Label;
+                Label SubTotalLabel = Item.FindControl("SubTotalLabel") as Label;
+
+                //double dCost = Convert.ToDouble(RemoveExtraText(CostLabel.Text));
+                double dInboundTotal = Convert.ToDouble(RemoveExtraText(InboundTotalLabel.Text));
+                double dFulfillableTotal = Convert.ToDouble(RemoveExtraText(FulfillableTotalLabel.Text));
+                //double dSubTotal = dInboundTotal + dFulfillableTotal;
+                double dSubTotal = Convert.ToDouble(RemoveExtraText(SubTotalLabel.Text));
+                dPageTotal += dSubTotal;
+                dPageInboundTotal += dInboundTotal;
+                dPageFulfillableTotal += dFulfillableTotal;
+
+                //InboundTotalLabel.Text = dInboundTotal.ToString("C");
+                //FulfillableTotalLabel.Text = dFulfillableTotal.ToString("C");
+                //SubTotalLabel.Text = dSubTotal.ToString("C");
+            }
+            Label totalInboundLbl = (Label)this.ListView1.FindControl("TotalInboundLabel");
+            Label totalFulfillableLbl = (Label)this.ListView1.FindControl("TotalFulfillableLabel");
+            Label totalCountLbl = (Label)this.ListView1.FindControl("TotalCountLabel");
+
+            totalInboundLbl.Text = dPageInboundTotal.ToString("C");
+            totalFulfillableLbl.Text = dPageFulfillableTotal.ToString("C");
+            totalCountLbl.Text = dPageTotal.ToString("C");
+        }
+
+        protected void ListView1tiesChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
