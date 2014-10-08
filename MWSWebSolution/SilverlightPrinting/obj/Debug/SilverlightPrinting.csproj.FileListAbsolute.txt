@@ -279,7 +279,6 @@ D:\Development\A Project\web_mws\MWSWebSolution\SilverlightPrinting\Bin\Debug\uk
 D:\Development\A Project\web_mws\MWSWebSolution\SilverlightPrinting\Bin\Debug\vi\System.ComponentModel.DataAnnotations.resources.dll
 D:\Development\A Project\web_mws\MWSWebSolution\SilverlightPrinting\Bin\Debug\zh-Hans\System.ComponentModel.DataAnnotations.resources.dll
 D:\Development\A Project\web_mws\MWSWebSolution\SilverlightPrinting\Bin\Debug\zh-Hant\System.ComponentModel.DataAnnotations.resources.dll
-D:\Development\A Project\web_mws\MWSWebSolution\SilverlightPrinting\obj\Debug\SilverlightPrinting.csprojResolveAssemblyReference.cache
 D:\Development\A Project\web_mws\MWSWebSolution\SilverlightPrinting\obj\Debug\App.g.i.cs
 D:\Development\A Project\web_mws\MWSWebSolution\SilverlightPrinting\obj\Debug\MainPage.g.i.cs
 D:\Development\A Project\web_mws\MWSWebSolution\SilverlightPrinting\obj\Debug\SilverlightPrinting.g.resources

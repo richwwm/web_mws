@@ -110,5 +110,32 @@ namespace LabelPrintingInterface.Reports
         {
 
         }
+
+        protected void ListView1_ItemCommand1(object sender, ListViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Sort") // Process header sort command
+            {
+                string sExpression = e.CommandArgument.ToString();
+                Session["SortedBy"] = sExpression;
+                this.ListView1.DataSourceID = null;
+                string sKeyWord = this.SearchBox.Text.ToString();
+                if (!string.IsNullOrEmpty(sKeyWord))
+                {
+                    this.ObjectDataSource1.FilterExpression = "SellerSKU LIKE " + "'%" + sKeyWord + "%'";
+                }
+                else
+                {
+                    this.ObjectDataSource1.FilterExpression = "";
+                }
+                this.ObjectDataSource1.Select();
+                this.ListView1.DataSource = this.ObjectDataSource1;
+                this.ListView1.DataBind();
+            }
+        }
+
+        protected void ListView1_Sorting(object sender, ListViewSortEventArgs e)
+        {
+            //this cannot be deleted , to handle the sorting event
+        }
     }
 }

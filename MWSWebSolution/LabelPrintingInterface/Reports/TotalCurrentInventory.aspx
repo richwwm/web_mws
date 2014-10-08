@@ -13,20 +13,28 @@
             <asp:ImageButton ID="SearchImageButton1" runat="server" Height="25px" ImageUrl="~/Images/search.png"
                 OnClick="SearchImageButton1_Click" Width="45px" /></div>
     </div>
-    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAllData"
-        TypeName="LabelPrintingInterface.TotalCurrentInventoryDataSource"></asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAllSortedData"
+        TypeName="LabelPrintingInterface.TotalCurrentInventoryDataSource">
+        <SelectParameters>
+            <asp:SessionParameter DefaultValue="SellerSKU ASC" Name="sortExpression" 
+                SessionField="SortedBy" Type="String" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
     <asp:HiddenField runat="server" ID="_repostcheckcode" />
     <asp:ListView ID="ListView1" runat="server" DataSourceID="ObjectDataSource1"
-        OnPreRender="ListView1_PreRender" >
+        OnPreRender="ListView1_PreRender" OnItemCommand="ListView1_ItemCommand1"
+        OnSorting="ListView1_Sorting">
         <LayoutTemplate>
             <table cellpadding="2" width="630px" border="0" runat="server" id="tblProducts">
                 <thead>
                     <tr id="Tr1" runat="server" style="background-color: #81DAF5">
                         <th id="Th1" runat="server">
-                            FNSKU
+                            SellerSKU
+                            <asp:ImageButton ID="SellerSKUSortButton" runat="server" Height="15px" ImageUrl="~/Images/downArrow.png"
+                            CommandName="Sort" CommandArgument="SellerSKU DESC" />
                         </th>
                         <th id="Th2" runat="server">
-                            SellerSKU
+                            Product Title
                         </th>
                         <th id="Th3" runat="server">
                             Product Cost (RMB)
@@ -77,10 +85,11 @@
         <ItemTemplate>
             <tr id="Tr2" runat="server">
                 <td valign="top">
-                    <asp:Label ID="FNSKULabel" runat="Server" Text='<%#Eval("FNSKU") %>' />
-                </td>
-                <td>
                     <asp:Label ID="SellerSKULabel" runat="Server" Text='<%#Eval("SellerSKU") %>'
+                        Width="300px" />
+                </td>
+                <td align="left">
+                    <asp:Label ID="ProductTitleLabel" runat="Server" Text='<%#Eval("ProductTitle") %>' 
                         Width="300px" />
                 </td>
                 <td align="right">
@@ -106,10 +115,11 @@
         <AlternatingItemTemplate>
             <tr style="background-color: #EFEFEF">
                 <td valign="top">
-                    <asp:Label ID="FNSKULabel" runat="Server" Text='<%#Eval("FNSKU") %>' />
-                </td>
-                <td>
                     <asp:Label ID="SellerSKULabel" runat="Server" Text='<%#Eval("SellerSKU") %>'
+                        Width="300px" />
+                </td>
+                <td align="left">
+                    <asp:Label ID="ProductTitleLabel" runat="Server" Text='<%#Eval("ProductTitle") %>' 
                         Width="300px" />
                 </td>
                 <td align="right">
