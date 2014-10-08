@@ -42,7 +42,8 @@ namespace LabelPrintingInterface
         public DataSet GetDataByCriteria(string parameter, string value)
         {
             string query = "SELECT [MWS].[dbo].[ProductAvailability].[FNSKU] AS " + '"' + "FNSKU" + '"'
-    + ",[inFlow].[dbo].[BASE_Product].[Name] AS " + '"' + "Product Name" + '"'
+    + ",[inFlow].[dbo].[BASE_Product].[Name] AS " + '"' + "SellerSKU" + '"'
+    + ",[inFlow].[dbo].[BASE_Product].[Description] AS " + '"' + "ProductTitle" + '"'
     + ",ISNULL([inFlow].[dbo].[Base_InventoryCost].[AverageCost],0) AS " + '"' + "Cost" + '"'
     + ",[MWS].[dbo].[ProductAvailability].[Inbound] AS " + '"' + "Inbound" + '"'
     + ",[MWS].[dbo].[ProductAvailability].[Fulfillable] AS " + '"' + "Fulfillable" + '"'

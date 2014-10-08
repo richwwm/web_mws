@@ -18,26 +18,35 @@ namespace LabelPrintingInterface.Reports
 
         protected void SearchImageButton1_Click(object sender, ImageClickEventArgs e)
         {
-                string sKeyWord = this.SearchBox.Text;  //sKeyWord can be ASIN or FNSKU
-                sKeyWord = sKeyWord.Trim();
-                this.ListView1.DataSourceID = null;
-                if (!string.IsNullOrEmpty(sKeyWord))
-                    this.ObjectDataSource1.FilterExpression = "FNSKU LIKE " + "'%" + sKeyWord + "%'";
-                else
-                    this.ObjectDataSource1.FilterExpression = "";
+            string sKeyWord = this.SearchBox.Text;  //sKeyWord can be ASIN or FNSKU
+            sKeyWord = sKeyWord.Trim();
+            this.ListView1.DataSourceID = null;
+            if (!string.IsNullOrEmpty(sKeyWord))
+                this.ObjectDataSource1.FilterExpression = "FNSKU LIKE " + "'%" + sKeyWord + "%'";
+            else
+                this.ObjectDataSource1.FilterExpression = "";
+            this.ObjectDataSource1.Select();
+            this.ListView1.DataSource = this.ObjectDataSource1;
+
+            this.ListView1.DataBind();
+
+            if (this.ListView1.Items.Count == 0)
+            {
+                this.ObjectDataSource1.FilterExpression = "SellerSKU LIKE " + "'%" + sKeyWord + "%'";
                 this.ObjectDataSource1.Select();
                 this.ListView1.DataSource = this.ObjectDataSource1;
 
                 this.ListView1.DataBind();
+            }
 
-                if (this.ListView1.Items.Count == 0)
-                {
-                    this.ObjectDataSource1.FilterExpression = "SellerSKU LIKE " + "'%" + sKeyWord + "%'";
-                    this.ObjectDataSource1.Select();
-                    this.ListView1.DataSource = this.ObjectDataSource1;
+            if (this.ListView1.Items.Count == 0)
+            {
+                this.ObjectDataSource1.FilterExpression = "ProductTitle LIKE " + "'%" + sKeyWord + "%'";
+                this.ObjectDataSource1.Select();
+                this.ListView1.DataSource = this.ObjectDataSource1;
 
-                    this.ListView1.DataBind();
-                }
+                this.ListView1.DataBind();
+            }
         }
 
         private string RemoveExtraText(string value)
