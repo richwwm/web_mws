@@ -77,25 +77,16 @@ namespace LabelPrintingInterface.Reports
             double dPageFulfillableTotal = 0;
             foreach (ListViewDataItem Item in this.ListView1.Items)
             {
-                //Label CostLabel = item.FindControl("CostLabel") as Label;
-                //Label InboundLabel = item.FindControl("InboundLabel") as Label;
                 Label InboundTotalLabel = Item.FindControl("InboundTotalLabel") as Label;
-                //Label FulfillableLabel = item.FindControl("FulfillableLabel") as Label;
                 Label FulfillableTotalLabel = Item.FindControl("FulfillableTotalLabel") as Label;
                 Label SubTotalLabel = Item.FindControl("SubTotalLabel") as Label;
 
-                //double dCost = Convert.ToDouble(RemoveExtraText(CostLabel.Text));
                 double dInboundTotal = Convert.ToDouble(RemoveExtraText(InboundTotalLabel.Text));
                 double dFulfillableTotal = Convert.ToDouble(RemoveExtraText(FulfillableTotalLabel.Text));
-                //double dSubTotal = dInboundTotal + dFulfillableTotal;
                 double dSubTotal = Convert.ToDouble(RemoveExtraText(SubTotalLabel.Text));
                 dPageTotal += dSubTotal;
                 dPageInboundTotal += dInboundTotal;
                 dPageFulfillableTotal += dFulfillableTotal;
-
-                //InboundTotalLabel.Text = dInboundTotal.ToString("C");
-                //FulfillableTotalLabel.Text = dFulfillableTotal.ToString("C");
-                //SubTotalLabel.Text = dSubTotal.ToString("C");
             }
             Label totalInboundLbl = (Label)this.ListView1.FindControl("TotalInboundLabel");
             Label totalFulfillableLbl = (Label)this.ListView1.FindControl("TotalFulfillableLabel");

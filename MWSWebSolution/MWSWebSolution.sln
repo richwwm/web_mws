@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MWSServer", "MWSServer\MWSS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugLogHandler", "DebugLogHandler\DebugLogHandler.csproj", "{06357E93-216F-470B-8238-005170C397DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarcodeLib", "BarcodeLib\BarcodeLib.csproj", "{F8646414-0C9C-49BB-9DA3-3923BF78A398}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FBAInventoryServiceMWS", "FBAInventoryServiceMWS\FBAInventoryServiceMWS.csproj", "{2D9B0F08-B93E-4080-A365-42E5CC6FFFF0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelPrintingInterface", "LabelPrintingInterface\LabelPrintingInterface.csproj", "{98A1B797-5678-4022-8070-5E11C5077C29}"
@@ -47,18 +45,6 @@ Global
 		{06357E93-216F-470B-8238-005170C397DD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{06357E93-216F-470B-8238-005170C397DD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{06357E93-216F-470B-8238-005170C397DD}.Release|x86.ActiveCfg = Release|Any CPU
-		{F8646414-0C9C-49BB-9DA3-3923BF78A398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8646414-0C9C-49BB-9DA3-3923BF78A398}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8646414-0C9C-49BB-9DA3-3923BF78A398}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{F8646414-0C9C-49BB-9DA3-3923BF78A398}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{F8646414-0C9C-49BB-9DA3-3923BF78A398}.Debug|x86.ActiveCfg = Debug|x86
-		{F8646414-0C9C-49BB-9DA3-3923BF78A398}.Debug|x86.Build.0 = Debug|x86
-		{F8646414-0C9C-49BB-9DA3-3923BF78A398}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8646414-0C9C-49BB-9DA3-3923BF78A398}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8646414-0C9C-49BB-9DA3-3923BF78A398}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{F8646414-0C9C-49BB-9DA3-3923BF78A398}.Release|Mixed Platforms.Build.0 = Release|x86
-		{F8646414-0C9C-49BB-9DA3-3923BF78A398}.Release|x86.ActiveCfg = Release|x86
-		{F8646414-0C9C-49BB-9DA3-3923BF78A398}.Release|x86.Build.0 = Release|x86
 		{2D9B0F08-B93E-4080-A365-42E5CC6FFFF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2D9B0F08-B93E-4080-A365-42E5CC6FFFF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D9B0F08-B93E-4080-A365-42E5CC6FFFF0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
