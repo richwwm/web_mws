@@ -12,3 +12,10 @@ D:\Development\A Project\web_mws\MWSWebSolution\MarketplaceWebService.Samples\bi
 D:\Development\A Project\web_mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.csprojResolveAssemblyReference.cache
 D:\Development\A Project\web_mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.exe
 D:\Development\A Project\web_mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.pdb
+D:\Richard\GitHub\web_mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.Samples.exe
+D:\Richard\GitHub\web_mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.Samples.pdb
+D:\Richard\GitHub\web_mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.dll
+D:\Richard\GitHub\web_mws\MWSWebSolution\MarketplaceWebService.Samples\bin\Debug\MarketplaceWebService.pdb
+D:\Richard\GitHub\web_mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.csprojResolveAssemblyReference.cache
+D:\Richard\GitHub\web_mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.exe
+D:\Richard\GitHub\web_mws\MWSWebSolution\MarketplaceWebService.Samples\obj\Debug\MarketplaceWebService.Samples.pdb
