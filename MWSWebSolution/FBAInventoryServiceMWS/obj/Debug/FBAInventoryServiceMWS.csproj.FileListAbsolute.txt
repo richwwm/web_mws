@@ -29,3 +29,7 @@ D:\Richard\GitHub\web_mws\MWSWebSolution\FBAInventoryServiceMWS\bin\Debug\FBAInv
 D:\Richard\GitHub\web_mws\MWSWebSolution\FBAInventoryServiceMWS\bin\Debug\FBAInventoryServiceMWS.pdb
 D:\Richard\GitHub\web_mws\MWSWebSolution\FBAInventoryServiceMWS\obj\Debug\FBAInventoryServiceMWS.dll
 D:\Richard\GitHub\web_mws\MWSWebSolution\FBAInventoryServiceMWS\obj\Debug\FBAInventoryServiceMWS.pdb
+D:\Development\A Project\web_mws\MWSWebSolution\FBAInventoryServiceMWS\bin\Debug\FBAInventoryServiceMWS.dll
+D:\Development\A Project\web_mws\MWSWebSolution\FBAInventoryServiceMWS\bin\Debug\FBAInventoryServiceMWS.pdb
+D:\Development\A Project\web_mws\MWSWebSolution\FBAInventoryServiceMWS\obj\Debug\FBAInventoryServiceMWS.dll
+D:\Development\A Project\web_mws\MWSWebSolution\FBAInventoryServiceMWS\obj\Debug\FBAInventoryServiceMWS.pdb
