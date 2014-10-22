@@ -31,28 +31,40 @@
                         <th id="Th1" runat="server">
                             SellerSKU
                             <asp:ImageButton ID="SellerSKUSortButton" runat="server" Height="15px" ImageUrl="~/Images/downArrow.png"
-                            CommandName="Sort" CommandArgument="SellerSKU DESC" />
+                                CommandName="Sort" CommandArgument="SellerSKU DESC" />
                         </th>
                         <th id="Th2" runat="server">
                             Product Title
                         </th>
                         <th id="Th3" runat="server">
                             Product Cost (RMB)
+                            <asp:ImageButton ID="ProductCostSortButton" runat="server" Height="15px" ImageUrl="~/Images/downArrow.png"
+                                CommandName="Sort" CommandArgument="Cost DESC" />
                         </th>
                         <th id="Th4" runat="server">
                             Inbound
+                            <asp:ImageButton ID="InboundSortButton" runat="server" Height="15px" ImageUrl="~/Images/downArrow.png"
+                                CommandName="Sort" CommandArgument="Inbound DESC" />
                         </th>
                         <th id="Th5" runat="server">
                             Inbound Total
+                            <asp:ImageButton ID="InboundTotalSortButton" runat="server" Height="15px" ImageUrl="~/Images/downArrow.png"
+                                CommandName="Sort" CommandArgument="InboundTotal DESC" />
                         </th>
                         <th id="Th6" runat="server">
                             Fulfillable
+                            <asp:ImageButton ID="FulfillableSortButton" runat="server" Height="15px" ImageUrl="~/Images/downArrow.png"
+                                CommandName="Sort" CommandArgument="Fulfillable DESC" />
                         </th>
                         <th id="Th7" runat="server">
                             Fulfillable Total
+                            <asp:ImageButton ID="FulfillableTotalSortButton" runat="server" Height="15px" ImageUrl="~/Images/downArrow.png"
+                                CommandName="Sort" CommandArgument="FulfillableTotal DESC" />
                         </th>
                         <th id="Th8" runat="server">
                             Sub Total (RMB)
+                            <asp:ImageButton ID="SubTotalSortButton" runat="server" Height="15px" ImageUrl="~/Images/downArrow.png"
+                                CommandName="Sort" CommandArgument="SubTotal DESC" />
                         </th>
                     </tr>
                 </thead>
@@ -99,16 +111,16 @@
                     <asp:Label ID="InboundLabel" runat="Server" Text='<%#Eval("Inbound") %>' />
                 </td>
                 <td align="right">
-                    <asp:Label ID="InboundTotalLabel" runat="Server" Text='<%#(Convert.ToDecimal(Eval("Cost").ToString()) * Convert.ToDecimal(Eval("Inbound").ToString())).ToString("c") %>' />
+                    <asp:Label ID="InboundTotalLabel" runat="Server" Text='<%#Convert.ToDouble(Eval("InboundTotal")).ToString("c") %>' />
                 </td>
                 <td align="right">
                     <asp:Label ID="FulfillableLabel" runat="Server" Text='<%#Eval("Fulfillable") %>' />
                 </td>
                 <td align="right">
-                    <asp:Label ID="FulfillableTotalLabel" runat="Server" Text='<%#(Convert.ToDecimal(Eval("Cost").ToString()) * Convert.ToDecimal(Eval("Fulfillable").ToString())).ToString("c") %>' />
+                    <asp:Label ID="FulfillableTotalLabel" runat="Server" Text='<%#Convert.ToDouble(Eval("FulfillableTotal")).ToString("c")  %>' />
                 </td>
                 <td align="right">
-                    <asp:Label ID="SubTotalLabel" runat="Server" Text='<%# ((Convert.ToDecimal(Eval("Cost").ToString()) * Convert.ToDecimal(Eval("Inbound").ToString())) + (Convert.ToDecimal(Eval("Cost").ToString()) * Convert.ToDecimal(Eval("Fulfillable")))).ToString("c") %>' />
+                    <asp:Label ID="SubTotalLabel" runat="Server" Text='<%#Convert.ToDouble(Eval("SubTotal")).ToString("c") %>' />
                 </td>
             </tr>
         </ItemTemplate>
@@ -129,16 +141,16 @@
                     <asp:Label ID="InboundLabel" runat="Server" Text='<%#Eval("Inbound") %>' />
                 </td>
                 <td align="right">
-                    <asp:Label ID="InboundTotalLabel" runat="Server" Text='<%#(Convert.ToDecimal(Eval("Cost").ToString()) * Convert.ToDecimal(Eval("Inbound").ToString())).ToString("c") %>' />
+                    <asp:Label ID="InboundTotalLabel" runat="Server" Text='<%#Convert.ToDouble(Eval("InboundTotal")).ToString("c") %>' />
                 </td>
                 <td align="right">
                     <asp:Label ID="FulfillableLabel" runat="Server" Text='<%#Eval("Fulfillable") %>' />
                 </td>
                 <td align="right">
-                    <asp:Label ID="FulfillableTotalLabel" runat="Server" Text='<%#(Convert.ToDecimal(Eval("Cost").ToString()) * Convert.ToDecimal(Eval("Fulfillable").ToString())).ToString("c") %>' />
+                    <asp:Label ID="FulfillableTotalLabel" runat="Server" Text='<%#Convert.ToDouble(Eval("FulfillableTotal")).ToString("c") %>' />
                 </td>
                 <td align="right">
-                    <asp:Label ID="SubTotalLabel" runat="Server" Text='<%# ((Convert.ToDecimal(Eval("Cost").ToString()) * Convert.ToDecimal(Eval("Inbound").ToString())) + (Convert.ToDecimal(Eval("Cost").ToString()) * Convert.ToDecimal(Eval("Fulfillable")))).ToString("c") %>' />
+                    <asp:Label ID="SubTotalLabel" runat="Server" Text='<%#Convert.ToDouble(Eval("SubTotal")).ToString("c") %>' />
                 </td>
             </tr>
         </AlternatingItemTemplate>

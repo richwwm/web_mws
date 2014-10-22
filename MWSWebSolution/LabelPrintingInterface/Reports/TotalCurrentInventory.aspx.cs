@@ -121,7 +121,7 @@ namespace LabelPrintingInterface.Reports
                 string sKeyWord = this.SearchBox.Text.ToString();
                 if (!string.IsNullOrEmpty(sKeyWord))
                 {
-                    this.ObjectDataSource1.FilterExpression = "SellerSKU LIKE " + "'%" + sKeyWord + "%'";
+                    this.ObjectDataSource1.FilterExpression = "FNSKU LIKE " + "'%" + sKeyWord + "%'";
                 }
                 else
                 {
@@ -130,6 +130,22 @@ namespace LabelPrintingInterface.Reports
                 this.ObjectDataSource1.Select();
                 this.ListView1.DataSource = this.ObjectDataSource1;
                 this.ListView1.DataBind();
+
+                if (this.ListView1.Items.Count == 0)
+                {
+                    this.ObjectDataSource1.FilterExpression = "SellerSKU LIKE " + "'%" + sKeyWord + "%'";
+                    this.ObjectDataSource1.Select();
+                    this.ListView1.DataSource = this.ObjectDataSource1;
+                    this.ListView1.DataBind();
+                }
+
+                if (this.ListView1.Items.Count == 0)
+                {
+                    this.ObjectDataSource1.FilterExpression = "ProductTitle LIKE " + "'%" + sKeyWord + "%'";
+                    this.ObjectDataSource1.Select();
+                    this.ListView1.DataSource = this.ObjectDataSource1;
+                    this.ListView1.DataBind();
+                }
             }
         }
 
