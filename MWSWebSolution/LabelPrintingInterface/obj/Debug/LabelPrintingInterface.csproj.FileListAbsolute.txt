@@ -59,8 +59,6 @@ D:\Richard\GitHub\web_mws\MWSWebSolution\LabelPrintingInterface\bin\FBAInventory
 D:\Richard\GitHub\web_mws\MWSWebSolution\LabelPrintingInterface\obj\Debug\LabelPrintingInterface.csprojResolveAssemblyReference.cache
 D:\Richard\GitHub\web_mws\MWSWebSolution\LabelPrintingInterface\obj\Debug\LabelPrintingInterface.dll
 D:\Richard\GitHub\web_mws\MWSWebSolution\LabelPrintingInterface\obj\Debug\LabelPrintingInterface.pdb
-D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\LabelReport2.rpt
-D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\LabelReport2.cs
 D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\Images\addToPrint.png
 D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\Images\clear.png
 D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\Images\downArrow.png
@@ -69,10 +67,8 @@ D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\Image
 D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\Images\search.png
 D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\LabelPrintingInterface.dll
 D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\LabelPrintingInterface.pdb
-D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\BarcodeLib.dll
 D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\DebugLogHandler.dll
 D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\FBAInventoryServiceMWS.dll
-D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\BarcodeLib.pdb
 D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\DebugLogHandler.pdb
 D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\bin\FBAInventoryServiceMWS.pdb
 D:\Development\A Project\web_mws\MWSWebSolution\LabelPrintingInterface\obj\Debug\LabelPrintingInterface.csprojResolveAssemblyReference.cache

@@ -7,11 +7,11 @@ D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService\bin\Debug\Ma
 D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService\bin\Debug\MarketplaceWebService.pdb
 D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService\obj\Debug\MarketplaceWebService.dll
 D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService\obj\Debug\MarketplaceWebService.pdb
-D:\Development\A Project\web_mws\MWSWebSolution\MarketplaceWebService\bin\Debug\MarketplaceWebService.dll
-D:\Development\A Project\web_mws\MWSWebSolution\MarketplaceWebService\bin\Debug\MarketplaceWebService.pdb
-D:\Development\A Project\web_mws\MWSWebSolution\MarketplaceWebService\obj\Debug\MarketplaceWebService.dll
-D:\Development\A Project\web_mws\MWSWebSolution\MarketplaceWebService\obj\Debug\MarketplaceWebService.pdb
 D:\Richard\GitHub\web_mws\MWSWebSolution\MarketplaceWebService\bin\Debug\MarketplaceWebService.dll
 D:\Richard\GitHub\web_mws\MWSWebSolution\MarketplaceWebService\bin\Debug\MarketplaceWebService.pdb
 D:\Richard\GitHub\web_mws\MWSWebSolution\MarketplaceWebService\obj\Debug\MarketplaceWebService.dll
 D:\Richard\GitHub\web_mws\MWSWebSolution\MarketplaceWebService\obj\Debug\MarketplaceWebService.pdb
+D:\Development\A Project\web_mws\MWSWebSolution\MarketplaceWebService\bin\Debug\MarketplaceWebService.dll
+D:\Development\A Project\web_mws\MWSWebSolution\MarketplaceWebService\bin\Debug\MarketplaceWebService.pdb
+D:\Development\A Project\web_mws\MWSWebSolution\MarketplaceWebService\obj\Debug\MarketplaceWebService.dll
+D:\Development\A Project\web_mws\MWSWebSolution\MarketplaceWebService\obj\Debug\MarketplaceWebService.pdb
