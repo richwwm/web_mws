@@ -8,12 +8,21 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FBAInventoryServiceMWS", "FBAInventoryServiceMWS\FBAInventoryServiceMWS.csproj", "{2D9B0F08-B93E-4080-A365-42E5CC6FFFF0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LabelPrintingInterface", "LabelPrintingInterface\LabelPrintingInterface.csproj", "{98A1B797-5678-4022-8070-5E11C5077C29}"
+	ProjectSection(ProjectDependencies) = postProject
+		{871E83B1-FC34-4C1F-8B3C-16564903C7BC} = {871E83B1-FC34-4C1F-8B3C-16564903C7BC}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SilverlightPrinting", "SilverlightPrinting\SilverlightPrinting.csproj", "{297912E3-DB32-47DA-9FC8-1E5BABCD64B1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketplaceWebService", "MarketplaceWebService\MarketplaceWebService.csproj", "{2E53ECDB-4C83-42AE-9108-DAD3427D44CB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketplaceWebService.Samples", "MarketplaceWebService.Samples\MarketplaceWebService.Samples.csproj", "{F7AB9ADF-DAA9-421A-B221-C899670135FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfServiceLibrary1", "WcfServiceLibrary1\WcfServiceLibrary1.csproj", "{871E83B1-FC34-4C1F-8B3C-16564903C7BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsServiceLabelPrinting", "WindowsServiceLabelPrinting\WindowsServiceLabelPrinting.csproj", "{1EB5D9D8-AB2A-47B9-AFC1-583CE00465F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfHttpService", "WcfHttpService\WcfHttpService.csproj", "{B09CB7CB-B657-467B-B25B-96838C912A97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +104,36 @@ Global
 		{F7AB9ADF-DAA9-421A-B221-C899670135FA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F7AB9ADF-DAA9-421A-B221-C899670135FA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F7AB9ADF-DAA9-421A-B221-C899670135FA}.Release|x86.ActiveCfg = Release|Any CPU
+		{871E83B1-FC34-4C1F-8B3C-16564903C7BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{871E83B1-FC34-4C1F-8B3C-16564903C7BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{871E83B1-FC34-4C1F-8B3C-16564903C7BC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{871E83B1-FC34-4C1F-8B3C-16564903C7BC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{871E83B1-FC34-4C1F-8B3C-16564903C7BC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{871E83B1-FC34-4C1F-8B3C-16564903C7BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{871E83B1-FC34-4C1F-8B3C-16564903C7BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{871E83B1-FC34-4C1F-8B3C-16564903C7BC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{871E83B1-FC34-4C1F-8B3C-16564903C7BC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{871E83B1-FC34-4C1F-8B3C-16564903C7BC}.Release|x86.ActiveCfg = Release|Any CPU
+		{1EB5D9D8-AB2A-47B9-AFC1-583CE00465F5}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{1EB5D9D8-AB2A-47B9-AFC1-583CE00465F5}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{1EB5D9D8-AB2A-47B9-AFC1-583CE00465F5}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{1EB5D9D8-AB2A-47B9-AFC1-583CE00465F5}.Debug|x86.ActiveCfg = Debug|x86
+		{1EB5D9D8-AB2A-47B9-AFC1-583CE00465F5}.Debug|x86.Build.0 = Debug|x86
+		{1EB5D9D8-AB2A-47B9-AFC1-583CE00465F5}.Release|Any CPU.ActiveCfg = Release|x86
+		{1EB5D9D8-AB2A-47B9-AFC1-583CE00465F5}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{1EB5D9D8-AB2A-47B9-AFC1-583CE00465F5}.Release|Mixed Platforms.Build.0 = Release|x86
+		{1EB5D9D8-AB2A-47B9-AFC1-583CE00465F5}.Release|x86.ActiveCfg = Release|x86
+		{1EB5D9D8-AB2A-47B9-AFC1-583CE00465F5}.Release|x86.Build.0 = Release|x86
+		{B09CB7CB-B657-467B-B25B-96838C912A97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B09CB7CB-B657-467B-B25B-96838C912A97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B09CB7CB-B657-467B-B25B-96838C912A97}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B09CB7CB-B657-467B-B25B-96838C912A97}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B09CB7CB-B657-467B-B25B-96838C912A97}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B09CB7CB-B657-467B-B25B-96838C912A97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B09CB7CB-B657-467B-B25B-96838C912A97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B09CB7CB-B657-467B-B25B-96838C912A97}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B09CB7CB-B657-467B-B25B-96838C912A97}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B09CB7CB-B657-467B-B25B-96838C912A97}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

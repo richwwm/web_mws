@@ -68,8 +68,8 @@ D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\bin\Debug\FBAInventoryService
 D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\bin\Debug\DebugLogHandler.pdb
 D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\bin\Debug\MarketplaceWebService.pdb
 D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.csprojResolveAssemblyReference.cache
-D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.Main.resources
 D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.Properties.Resources.resources
 D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.csproj.GenerateResource.Cache
 D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.exe
 D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.pdb
+D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.Main.resources

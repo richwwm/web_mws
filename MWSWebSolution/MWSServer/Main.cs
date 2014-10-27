@@ -20,14 +20,20 @@ namespace MWSServer
     {
         SellerInventorySupplyList supplyList;
         string _ConnectionString = "";
-        Thread UploadThread;
+
         bool doWork;
         string sLogPath = Directory.GetCurrentDirectory() + "\\";
         string sClass = "Main.cs";
         MWSUserProfile usMWSProfile;
+        List<workerThreadParameter> threadParameterList;
+        List<MWSUserProfile> profileList;
+        List<Thread> threadList;
+
         public Main()
         {
             InitializeComponent();
+            profileList = new List<MWSUserProfile>();
+            threadParameterList = new List<workerThreadParameter>();
             supplyList = new SellerInventorySupplyList();
             string sDBFile = "Database1.mdf";
             string sDBpath = Directory.GetCurrentDirectory() + "\\" + sDBFile;
@@ -35,24 +41,39 @@ namespace MWSServer
             //_ConnectionString = "Data Source=.\\SQLEXPRESS;AttachDbFilename=" + sDBpath + ";Integrated Security=True;User Instance=True;";
             //use production database
             _ConnectionString = "Data Source=192.168.103.150\\INFLOWSQL;Initial Catalog=MWS;User ID=mws;Password=p@ssw0rd";
-            String accessKeyId = "AKIAJ2IS6ZEEGQPJV7WA";
-            String secretAccessKey = "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";
-            const string marketplaceId = "ATVPDKIKX0DER";
-            const string sellerId = "A2TYS339AQK0NU";
-            string serviceURL = MWSServer.Properties.Settings.Default["MWS_ServiceURL"].ToString();
-            usMWSProfile = new MWSUserProfile(accessKeyId, secretAccessKey, marketplaceId, sellerId, serviceURL);
 
-            DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "Main() connectionString = " + _ConnectionString);
-            ReportRequestHandler getReportHandler = new ReportRequestHandler(usMWSProfile);
-            string sReportType = "_GET_MERCHANT_LISTINGS_DATA_";
-            //_GET_FBA_FULFILLMENT_INVENTORY_HEALTH_DATA_
-            //_GET_AFN_INVENTORY_DATA_
-            //_GET_FBA_MYI_ALL_INVENTORY_DATA_
-            //_GET_FLAT_FILE_OPEN_LISTINGS_DATA_
-            //_GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA_
-            //_GET_MERCHANT_LISTINGS_DATA_
-            getReportHandler.GenerateReport(sReportType);
-            //UploadThread = new Thread(new ThreadStart(GetUpdatedInventoryData));
+            SqlDataHandler profileHandler = new SqlDataHandler(_ConnectionString);
+            profileList = profileHandler.GetAWSLoginProfile();
+
+            foreach (MWSUserProfile profile in profileList)
+            {
+                Thread workerThread;
+                threadList = new List<Thread>();
+                //String accessKeyId = "AKIAJ2IS6ZEEGQPJV7WA";
+                //String secretAccessKey = "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";
+                //const string marketplaceId = "ATVPDKIKX0DER";
+                //const string sellerId = "A2TYS339AQK0NU";
+                //string serviceURL = MWSServer.Properties.Settings.Default["MWS_ServiceURL"].ToString();
+                //usMWSProfile = new MWSUserProfile(accessKeyId, secretAccessKey, marketplaceId, sellerId, serviceURL);
+                profile.SServiceURL = MWSServer.Properties.Settings.Default["MWS_ServiceURL"].ToString();
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "Main() connectionString = " + _ConnectionString);
+                //ReportRequestHandler getReportHandler = new ReportRequestHandler(usMWSProfile);
+                //string sReportType = "_GET_MERCHANT_LISTINGS_DATA_";
+                //_GET_FBA_FULFILLMENT_INVENTORY_HEALTH_DATA_
+                //_GET_AFN_INVENTORY_DATA_
+                //_GET_FBA_MYI_ALL_INVENTORY_DATA_
+                //_GET_FLAT_FILE_OPEN_LISTINGS_DATA_
+                //_GET_FBA_MYI_UNSUPPRESSED_INVENTORY_DATA_
+                //_GET_MERCHANT_LISTINGS_DATA_
+                //getReportHandler.GenerateReport(sReportType);
+                workerThread = new Thread(new ParameterizedThreadStart(GetUpdatedInventoryData));
+                workerThreadParameter threadPara = new workerThreadParameter(profile);
+                threadParameterList.Add(threadPara);
+                threadList.Add(workerThread);
+                workerThread.Start(threadPara);
+            }
+
+
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -62,7 +83,6 @@ namespace MWSServer
                 Hide();
             }));
             doWork = true;
-            UploadThread.Start();
 
         }
 
@@ -80,14 +100,17 @@ namespace MWSServer
 
         }
 
-        private void GetUpdatedInventoryData()
+        private void GetUpdatedInventoryData(object threadpara)
         {
-            ReportRequestHandler getReportHandler = new ReportRequestHandler(usMWSProfile);
+
+            DataTable InventoryTable = new DataTable();
+            workerThreadParameter para = (workerThreadParameter)threadpara;
+            ReportRequestHandler getReportHandler = new ReportRequestHandler(para._profile);
             string sReportType = "_GET_FBA_MYI_ALL_INVENTORY_DATA_";
             string sPeriod = "_15_MINUTES_";
             getReportHandler.ScheduleReportRequest(sReportType, sPeriod);
-            DataTable InventoryTable = new DataTable();
-            while (doWork)
+            string sMechantID = para._profile.SSellerId;
+            while (para.doWork)
             {
                 try
                 {
@@ -103,6 +126,7 @@ namespace MWSServer
                     ProductAvailabilityTable.Columns.Add("Fulfillable", typeof(Int32));
                     ProductAvailabilityTable.Columns.Add("Unfulfillable", typeof(Int32));
                     ProductAvailabilityTable.Columns.Add("Reserved", typeof(Int32));
+                    ProductAvailabilityTable.Columns.Add("MerchantID", typeof(String));
                     foreach (DataRow row in InventoryTable.Rows)
                     {
                         DataRow ProductRow = ProductAvailabilityTable.NewRow();
@@ -114,6 +138,7 @@ namespace MWSServer
                         ProductRow["Fulfillable"] = Int32.Parse(row[10].ToString());
                         ProductRow["Unfulfillable"] = Int32.Parse(row[11].ToString());
                         ProductRow["Reserved"] = Int32.Parse(row[12].ToString());
+                        ProductRow["MerchantID"] = sMechantID;
                         ProductAvailabilityTable.Rows.Add(ProductRow);
                     }
                     if (ProductAvailabilityTable.Rows.Count > 0)
@@ -162,9 +187,22 @@ namespace MWSServer
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "exitToolStripMenuItem_Click() worker thread set to false");
-            doWork = false;
+            foreach (workerThreadParameter para in threadParameterList)
+            {
+                para.doWork = false;
+            }
             DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "exitToolStripMenuItem_Click() Application will exit");
             Application.Exit();
+        }
+    }
+
+    class workerThreadParameter
+    {
+        public bool doWork = true;
+        public MWSUserProfile _profile;
+        public workerThreadParameter(MWSUserProfile profile)
+        {
+            _profile = profile;
         }
     }
 }

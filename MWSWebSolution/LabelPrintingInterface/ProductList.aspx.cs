@@ -8,13 +8,17 @@ using System.Data;
 using System.Configuration;
 using System.Data.SqlClient;
 using LabelPrintingInterface.DataSource;
-
+using DebugLogHandler;
+using MWS.Lib;
+using System.Web.Security;
 namespace LabelPrintingInterface
 {
     public partial class ProductList : System.Web.UI.Page
     {
         DataSet PrintLabelDataSet = null;
         DataTable LabelTable = null;
+        string sClass = "ProductList";
+        string sLogPath = HttpContext.Current.Server.MapPath("~");
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -32,6 +36,8 @@ namespace LabelPrintingInterface
                 //PrintLabelDataSet = this.Master.LabelPrintDataSet;
 
             }
+
+
         }
 
         private void InitPrintList()
@@ -118,6 +124,10 @@ namespace LabelPrintingInterface
         protected void Page_Load(object sender, EventArgs e)
         {
             //  CancelUnexpectedRePost();
+            if (!this.Page.User.Identity.IsAuthenticated)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+            }
 
         }
 
@@ -168,19 +178,52 @@ namespace LabelPrintingInterface
 
         protected void PrintAllButton_Click(object sender, EventArgs e)
         {
-            //    UpdateCurrentQuantity2PrintList(this.LabelPrintList);
-            //    DataSet tempDataSet = ((DataSet)Session["LabelPrintDataSet"]);
-            //    if (tempDataSet != null && tempDataSet.Tables[0].Rows.Count > 0)
-            //    {
-            //        LabelReportHandler printAllLabel = new LabelReportHandler(tempDataSet);
-            //        printAllLabel.PrintLabel();
-            //    }
-            if (!ClientScript.IsStartupScriptRegistered("alert"))
+           string sClientIP =  GetClientIP();
+           if (sClientIP == "::1")
+               sClientIP = "127.0.0.1";
+           BeginGetAsyncData(sClientIP);
+        }
+
+
+
+        protected string GetClientIP()
+        {
+
+            if (Request.ServerVariables["HTTP_VIA"] == null)
             {
-                Page.ClientScript.RegisterStartupScript(this.GetType(),
-                    "alert", "runNotepad();", true);
+                if (Request.ServerVariables["REMOTE_ADDR"] == null)
+                    return "";
+                else
+                return Request.ServerVariables["REMOTE_ADDR"].ToString();
+            }
+            else
+            {
+                if (Request.ServerVariables["HTTP_X_FORWARDED_FOR"] == null)
+                    return "";
+                return Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
             }
         }
+        ServiceReference1.Service1Client client = null;
+
+        void BeginGetAsyncData(string IP)
+        {
+            string sRemoteAddr = "net.tcp://localhost:8002/Service1";
+            IP = "192.168.254.10";
+            sRemoteAddr = sRemoteAddr.Replace("localhost", IP);
+            //try
+            //{
+            client = new ServiceReference1.Service1Client("MWSClientPrintConfiguration", sRemoteAddr);
+            string[] jobList = { "X0000" };
+
+            client.Print(jobList);
+            client.Close();
+            //}
+            //catch (Exception ex)
+            //{
+            //    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, ex.Message.ToString());
+            //}
+        }
+
 
         protected void ClearPrintListButton_Click(object sender, EventArgs e)
         {

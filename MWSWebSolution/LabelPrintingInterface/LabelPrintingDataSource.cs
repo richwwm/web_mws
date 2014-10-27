@@ -18,18 +18,43 @@ namespace LabelPrintingInterface.DataSource
             _connectionString = "Data Source=192.168.103.150\\INFLOWSQL;Initial Catalog=MWS;User ID=mws;Password=p@ssw0rd";
         }
 
+        public DataSet GetAllSortedDataByMerchantID(string sortExpression, string MerchantID)
+        {
+            sortExpression = sortExpression.Replace("Ascending", "ASC");
+            sortExpression = sortExpression.Replace("Descending", "DESC");
+            string query = "";
+            SqlCommand cmd;
+            query = "SELECT * FROM ProductAvailability where MerchantID = " + "'"+MerchantID+"'" + " order by " + sortExpression;
+            cmd = new SqlCommand(query);
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+
+                DataTable dTable = new DataTable();
+                using (SqlConnection con = new SqlConnection(_connectionString))
+                {
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        cmd.Connection = conn;
+                        sda.SelectCommand = cmd;
+                        using (DataSet ds = new DataSet())
+                        {
+                            sda.Fill(dTable);
+                            ds.Tables.Add(dTable);
+                            return ds;
+                        }
+                    }
+                }
+            }
+        }
+
         public DataSet GetAllSortedData(string sortExpression)
         {
             sortExpression = sortExpression.Replace("Ascending", "ASC");
             sortExpression = sortExpression.Replace("Descending", "DESC");
             string query = "";
             SqlCommand cmd;
-
-
             query = "SELECT * FROM ProductAvailability order by " + sortExpression;
             cmd = new SqlCommand(query);
-
-
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
 
