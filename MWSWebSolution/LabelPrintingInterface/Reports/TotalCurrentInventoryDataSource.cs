@@ -35,7 +35,12 @@ namespace LabelPrintingInterface
             return sortDS;
         }
 
-        public DataSet GetAllData()
+        //public DataSet GetAllData()
+        //{
+        //    return GetAllSortedDataByMerchantID("");
+        //}
+
+        public DataSet GetAllSortedDataByMerchantID(string sortExpression,string sMerchantID)
         {
             return GetAllSortedData("");
         }
@@ -48,10 +53,12 @@ namespace LabelPrintingInterface
                  + ",ISNULL([inFlow].[dbo].[Base_InventoryCost].[AverageCost],0) AS " + '"' + "Cost" + '"'
                  + ",[MWS].[dbo].[ProductAvailability].[Inbound] AS " + '"' + "Inbound" + '"'
                  + ",[MWS].[dbo].[ProductAvailability].[Fulfillable] AS " + '"' + "Fulfillable" + '"'
+                 + ",[MWS].[dbo].[ProductAvailability].[MerchantID]"
                  + "FROM [inFlow].[dbo].[BASE_Product] "
                  + "INNER JOIN [inFlow].[dbo].[BASE_InventoryCost] ON [inFlow].[dbo].[BASE_Product].[ProdId]=[inFlow].[dbo].[BASE_InventoryCost].[ProdId] "
                  + "INNER JOIN [MWS].[dbo].[ProductAvailability] ON [MWS].[dbo].[ProductAvailability].SellerSKU = [inFlow].[dbo].[BASE_Product].[Name] "
-                 + "WHERE [inFlow].[dbo].[BASE_InventoryCost].[CurrencyId] = '8'";
+                 + "WHERE [inFlow].[dbo].[BASE_InventoryCost].[CurrencyId] = '8'"
+                 + "AND ( MerchantID ="  + "'" + sMerchantID + "')";
 
             /*if (!String.IsNullOrEmpty(sortExpression.Trim()))
             {

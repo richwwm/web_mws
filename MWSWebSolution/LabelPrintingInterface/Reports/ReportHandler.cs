@@ -55,5 +55,34 @@ namespace LabelPrintingInterface
                 }
             }
         }
+
+    //    public DataSet GetDataByCriteria(string parameter, string value)
+    //    {
+    //        string query = "SELECT [MWS].[dbo].[ProductAvailability].[FNSKU] AS " + '"' + "FNSKU" + '"'
+    //+ ",[inFlow].[dbo].[BASE_Product].[Name] AS " + '"' + "Product Name" + '"'
+    //+ ",ISNULL([inFlow].[dbo].[Base_InventoryCost].[AverageCost],0) AS " + '"' + "Cost" + '"'
+    //+ ",[MWS].[dbo].[ProductAvailability].[Inbound] AS " + '"' + "Inbound" + '"'
+    //+ ",[MWS].[dbo].[ProductAvailability].[Fulfillable] AS " + '"' + "Fulfillable" + '"'
+    //+ "FROM [inFlow].[dbo].[BASE_Product] "
+    //+ "INNER JOIN [inFlow].[dbo].[BASE_InventoryCost] ON [inFlow].[dbo].[BASE_Product].[ProdId]=[inFlow].[dbo].[BASE_InventoryCost].[ProdId] "
+    //+ "INNER JOIN [MWS].[dbo].[ProductAvailability] ON [MWS].[dbo].[ProductAvailability].SellerSKU = [inFlow].[dbo].[BASE_Product].[Name] "
+    //+ "WHERE [inFlow].[dbo].[BASE_InventoryCost].[CurrencyId] = '8'"
+    //+ "AND (" + parameter + " LIKE '%'+@parameter+'%')";
+    //        SqlCommand cmd = new SqlCommand(query);
+    //        cmd.Parameters.AddWithValue("@parameter", value);
+    //        using (SqlConnection con = new SqlConnection(_connectionString))
+    //        {
+    //            using (SqlDataAdapter sda = new SqlDataAdapter())
+    //            {
+    //                cmd.Connection = con;
+    //                sda.SelectCommand = cmd;
+    //                using (DataSet ds = new DataSet())
+    //                {
+    //                    sda.Fill(ds);
+    //                    return ds;
+    //                }
+    //            }
+    //        }
+    //    }
     }
 }

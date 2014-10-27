@@ -68,25 +68,8 @@ D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\bin\Debug\FBAInventoryService
 D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\bin\Debug\DebugLogHandler.pdb
 D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\bin\Debug\MarketplaceWebService.pdb
 D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.csprojResolveAssemblyReference.cache
-D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.Main.resources
 D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.Properties.Resources.resources
 D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.csproj.GenerateResource.Cache
 D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.exe
 D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.pdb
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\bin\Debug\Database1.mdf
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\bin\Debug\Database1_log.ldf
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\bin\Debug\MWSServer.exe.config
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\bin\Debug\MWSServer.exe
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\bin\Debug\MWSServer.pdb
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\bin\Debug\DebugLogHandler.dll
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\bin\Debug\FBAInventoryServiceMWS.dll
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\bin\Debug\MarketplaceWebService.dll
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\bin\Debug\FBAInventoryServiceMWS.pdb
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\bin\Debug\DebugLogHandler.pdb
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\bin\Debug\MarketplaceWebService.pdb
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.csprojResolveAssemblyReference.cache
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.Main.resources
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.Properties.Resources.resources
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.csproj.GenerateResource.Cache
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.exe
-D:\Development\A Project\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.pdb
+D:\Richard\GitHub\web_mws\MWSWebSolution\MWSServer\obj\x86\Debug\MWSServer.Main.resources

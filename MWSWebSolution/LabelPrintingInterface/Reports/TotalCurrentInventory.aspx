@@ -13,11 +13,13 @@
             <asp:ImageButton ID="SearchImageButton1" runat="server" Height="25px" ImageUrl="~/Images/search.png"
                 OnClick="SearchImageButton1_Click" Width="45px" /></div>
     </div>
-    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAllSortedData"
+    <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAllSortedDataByMerchantID"
         TypeName="LabelPrintingInterface.TotalCurrentInventoryDataSource">
         <SelectParameters>
             <asp:SessionParameter DefaultValue="SellerSKU ASC" Name="sortExpression" 
                 SessionField="SortedBy" Type="String" />
+            <asp:SessionParameter Name="sMerchantID" SessionField="MerchantID" 
+                Type="String" />
         </SelectParameters>
     </asp:ObjectDataSource>
     <asp:HiddenField runat="server" ID="_repostcheckcode" />

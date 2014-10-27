@@ -55,7 +55,7 @@ namespace LabelPrintingInterface.Reports
             return new string(value.Where(c => allowedChars.Contains(c)).ToArray());
         }
 
-       
+
 
         protected void ListView1_PreRender(object sender, EventArgs e)
         {

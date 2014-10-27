@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using DebugLogHandler;
 using System.IO;
+using MWSUser;
 namespace MWSServer
 {
     class SqlDataHandler
@@ -19,14 +20,53 @@ namespace MWSServer
             _connectionString = sConnectionString;
         }
 
+        public List<MWSUserProfile> GetAWSLoginProfile()
+        {
+            List<MWSUserProfile> profileList = new List<MWSUserProfile>();
+            SqlCommand cmd;
+            string query;
+
+            query = "SELECT * FROM [MWS].[dbo].[AWSLoginToken]";
+            cmd = new SqlCommand(query);
+
+            DataTable dTable = new DataTable();
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                using (SqlConnection con = new SqlConnection(_connectionString))
+                {
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        cmd.Connection = conn;
+                        sda.SelectCommand = cmd;
+                        using (DataSet ds = new DataSet())
+                        {
+                            sda.Fill(dTable);
+                        }
+                    }
+                }
+            }
+
+            foreach (DataRow row in dTable.Rows)
+            {
+                string sAccessKeyID = row["AWSAccessKeyID"].ToString();
+                string sSecretKey = row["SecretKey"].ToString();
+                string sMerchantID = row["MerchantID"].ToString();
+                string sMarketplaceID = row["MarketplaceID"].ToString();
+                MWSUserProfile profile = new MWSUserProfile(sAccessKeyID, sSecretKey, sMarketplaceID, sMerchantID, "");
+                profileList.Add(profile);
+            }
+           
+            return profileList;
+        }
+
         public void UpdateData(string sTableName, DataSet dsTemp)
         {
             SqlDataAdapter adapter = new SqlDataAdapter();
-            string insertQueryString = "INSERT INTO " + sTableName + " (FNSKU, SellerSKU,ASIN,ProductName,Inbound,Fulfillable,Unfulfillable,Reserved,Last_update) " +
-        " VALUES (@FNSKU, @SellerSKU,@ASIN,@ProductName,@Inbound,@Fulfillable,@Unfulfillable,@Reserved,@Last_update)";
+            string insertQueryString = "INSERT INTO " + sTableName + " (FNSKU, SellerSKU,ASIN,ProductName,Inbound,Fulfillable,Unfulfillable,Reserved,Last_update,MerchantID) " +
+        " VALUES (@FNSKU, @SellerSKU,@ASIN,@ProductName,@Inbound,@Fulfillable,@Unfulfillable,@Reserved,@Last_update,@MerchantID)";
 
             string updateQueryString = "UPDATE " + sTableName + " SET Inbound = @Inbound, Fulfillable = @Fulfillable,  Unfulfillable = @Unfulfillable,  Reserved = @Reserved, Last_update = @Last_update" +
-        " WHERE FNSKU = @FNSKU";
+        " WHERE FNSKU = @FNSKU and MerchantID = @MerchantID";
 
             using (SqlConnection connection =
             new SqlConnection(_connectionString))
@@ -43,6 +83,7 @@ namespace MWSServer
                         command.Parameters.AddWithValue("@Unfulfillable", row["Unfulfillable"].ToString());
                         command.Parameters.AddWithValue("@Reserved", row["Reserved"].ToString());
                         command.Parameters.AddWithValue("@Last_update", DateTime.Now);
+                        command.Parameters.AddWithValue("@MerchantID", row["MerchantID"].ToString());
 
                         int result = command.ExecuteNonQuery(); //number of rows returned.
                         if (result == 0) //no data updated , thus insert new data to database;
@@ -57,6 +98,7 @@ namespace MWSServer
                             insertCommand.Parameters.AddWithValue("@Unfulfillable", row["Unfulfillable"].ToString());
                             insertCommand.Parameters.AddWithValue("@Reserved", row["Reserved"].ToString());
                             insertCommand.Parameters.AddWithValue("@Last_update", DateTime.Now);
+                            insertCommand.Parameters.AddWithValue("@MerchantID", row["MerchantID"].ToString());
                             result = insertCommand.ExecuteNonQuery();
                         }
                     }
