@@ -178,10 +178,10 @@ namespace LabelPrintingInterface
 
         protected void PrintAllButton_Click(object sender, EventArgs e)
         {
-           string sClientIP =  GetClientIP();
-           if (sClientIP == "::1")
-               sClientIP = "127.0.0.1";
-           BeginGetAsyncData(sClientIP);
+           //string sClientIP =  GetClientIP();
+           //if (sClientIP == "::1")
+           //    sClientIP = "127.0.0.1";
+           //BeginGetAsyncData(sClientIP);
         }
 
 
@@ -203,20 +203,20 @@ namespace LabelPrintingInterface
                 return Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
             }
         }
-        ServiceReference1.Service1Client client = null;
+
 
         void BeginGetAsyncData(string IP)
         {
-            string sRemoteAddr = "net.tcp://localhost:8002/Service1";
-            IP = "192.168.254.10";
-            sRemoteAddr = sRemoteAddr.Replace("localhost", IP);
-            //try
-            //{
-            client = new ServiceReference1.Service1Client("MWSClientPrintConfiguration", sRemoteAddr);
-            string[] jobList = { "X0000" };
+            //string sRemoteAddr = "net.tcp://localhost:8002/Service1";
+            //IP = "192.168.254.10";
+            //sRemoteAddr = sRemoteAddr.Replace("localhost", IP);
+            ////try
+            ////{
+            //client = new ServiceReference1.Service1Client("MWSClientPrintConfiguration", sRemoteAddr);
+            //string[] jobList = { "X0000" };
 
-            client.Print(jobList);
-            client.Close();
+            //client.Print(jobList);
+            //client.Close();
             //}
             //catch (Exception ex)
             //{
