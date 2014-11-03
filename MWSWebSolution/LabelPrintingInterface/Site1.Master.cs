@@ -6,36 +6,49 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Web.Security;
+using MWS.Lib;
 
 namespace LabelPrintingInterface
 {
     public partial class Site1 : System.Web.UI.MasterPage
     {
+        string constr = "Data Source=192.168.103.150\\INFLOWSQL;Initial Catalog=MWS;User ID=mws;Password=p@ssw0rd";
+        SqlDataHandler dbHandler;
+        string sMerchantID;
         protected void Page_Load(object sender, EventArgs e)
         {
-            GetUser_IP();
-        }
-
-        protected void GetUser_IP()
-        {
-            string VisitorsIPAddr = string.Empty;
-            if (HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] != null)
+            if (this.Page.User.Identity.IsAuthenticated)
             {
-                VisitorsIPAddr = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"].ToString();
+                string strLoginID = this.Page.User.Identity.Name;
+                if (strLoginID != null)
+                {
+                    dbHandler = new SqlDataHandler(constr);
+                    sMerchantID = dbHandler.GetMerchantIDByUserID(strLoginID);
+                    Session["MerchantID"] = sMerchantID;
+                }
             }
-            else if (HttpContext.Current.Request.UserHostAddress.Length != 0)
+            else
             {
-                VisitorsIPAddr = HttpContext.Current.Request.UserHostAddress;
+                string currentUrl = HttpContext.Current.Request.Url.ToString();
+                if(!currentUrl.Contains("Login"))
+                    FormsAuthentication.RedirectToLoginPage();
             }
-            ClientInfoLabel.Text = "Your IP is: " + VisitorsIPAddr;
         }
 
         protected void Menu1_MenuItemClick(object sender, MenuEventArgs e)
         {
-            if (e.Item.Text.ToString() == "Logout")
+            if (e.Item.Text == "Logout")
             {
                 FormsAuthentication.SignOut();
+                FormsAuthentication.RedirectToLoginPage();
             }
         }
+
+        public Menu PropertyMasterMenu
+        {
+            get { return Menu1; }
+        }
+
+
     }
 }

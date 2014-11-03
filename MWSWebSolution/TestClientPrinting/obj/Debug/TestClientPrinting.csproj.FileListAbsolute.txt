@@ -1,4 +1,0 @@
-D:\Richard\progarm_src\mws\mws\MWSWebSolution\TestClientPrinting\bin\TestClientPrinting.dll
-D:\Richard\progarm_src\mws\mws\MWSWebSolution\TestClientPrinting\bin\TestClientPrinting.pdb
-D:\Richard\progarm_src\mws\mws\MWSWebSolution\TestClientPrinting\obj\Debug\TestClientPrinting.dll
-D:\Richard\progarm_src\mws\mws\MWSWebSolution\TestClientPrinting\obj\Debug\TestClientPrinting.pdb

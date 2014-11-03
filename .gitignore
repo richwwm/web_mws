@@ -1,4 +1,7 @@
 #Ignore files build by Visual Studio
+*.dll
+*.pdb
+*.exe
 *.user
 *.aps
 *.pch
@@ -11,9 +14,20 @@
 *.cache
 *.ilk
 *.log
-[Bb]in
+[Bb]in*/
 [Dd]ebug*/
 &.sbr
 obj/
 [Rr]elease*/
 _ReSharper*/
+[Oo]bj*/
+MWSWebSolution/DebugLogHandler/obj/Debug/DebugLogHandler.csproj.FileListAbsolute.txt
+MWSWebSolution/DebugLogHandler/obj/Debug/DebugLogHandler.csproj.FileListAbsolute.txt
+MWSWebSolution/DebugLogHandler/obj/Debug/DebugLogHandler.csproj.FileListAbsolute.txt
+MWSWebSolution/DebugLogHandler/obj/Debug/DebugLogHandler.csproj.FileListAbsolute.txt
+*.dll
+*.pdb
+*.user
+*.csproj
+*.cache
+*.exe

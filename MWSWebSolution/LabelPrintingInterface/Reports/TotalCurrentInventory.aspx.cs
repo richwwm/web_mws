@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Web.Security;
 
 namespace LabelPrintingInterface.Reports
 {
@@ -14,6 +15,10 @@ namespace LabelPrintingInterface.Reports
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!this.Page.User.Identity.IsAuthenticated)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+            }
         }
 
         protected void SearchImageButton1_Click(object sender, ImageClickEventArgs e)
