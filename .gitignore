@@ -1,4 +1,7 @@
 #Ignore files build by Visual Studio
+*.dll
+*.pdb
+*.exe
 *.user
 *.aps
 *.pch
@@ -11,11 +14,9 @@
 *.cache
 *.ilk
 *.log
-[Bb]in
+[Bb]in*/
 [Dd]ebug*/
 &.sbr
 obj/
 [Rr]elease*/
 _ReSharper*/
-*.dll
-*.pdb
