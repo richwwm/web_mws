@@ -16,7 +16,7 @@ namespace LabelPrintingInterface
         {
             Menu masteMenu = Master.FindControl("Menu1") as Menu;
             masteMenu.Visible = false;
-            Session["UserID"] = "";
+            Session["MerchantID"] = "";
         }
 
         protected void LoginButton_Click(object sender, EventArgs e)
@@ -54,6 +54,23 @@ namespace LabelPrintingInterface
                         Login1.FailureText = "Account has not been activated.";
                         break;
                     default:
+                        string userData = userId.ToString();
+
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
+                          userId.ToString(),
+                          DateTime.Now,
+                          DateTime.Now.AddMinutes(30),
+                          Login1.RememberMeSet,
+                          userData,
+                          FormsAuthentication.FormsCookiePath);
+
+                        // Encrypt the ticket.
+                        string encTicket = FormsAuthentication.Encrypt(ticket);
+
+                        // Create the cookie.
+                        Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
+
+                        // Redirect back to original URL.
                         FormsAuthentication.RedirectFromLoginPage(userId.ToString(), Login1.RememberMeSet);
                         break;
                 }

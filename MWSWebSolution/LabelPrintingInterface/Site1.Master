@@ -30,7 +30,7 @@
                             Text="Total Current Inventory Value" Value="Total Current Inventory Value">
                         </asp:MenuItem>
                     </asp:MenuItem>
-                    <asp:MenuItem Text="Logout" Value="Logout" NavigateUrl="~/Login.aspx"></asp:MenuItem>
+                    <asp:MenuItem Text="Logout" Value="Logout"></asp:MenuItem>
                 </Items>
                 <StaticHoverStyle BackColor="#284E98" ForeColor="White" />
             </asp:Menu>
