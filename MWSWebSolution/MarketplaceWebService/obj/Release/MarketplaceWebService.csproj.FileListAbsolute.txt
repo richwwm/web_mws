@@ -1,8 +1,0 @@
-D:\mws\MWSWebSolution\MarketplaceWebService\bin\Release\MarketplaceWebService.dll
-D:\mws\MWSWebSolution\MarketplaceWebService\bin\Release\MarketplaceWebService.pdb
-D:\mws\MWSWebSolution\MarketplaceWebService\obj\Release\MarketplaceWebService.dll
-D:\mws\MWSWebSolution\MarketplaceWebService\obj\Release\MarketplaceWebService.pdb
-D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService\bin\Release\MarketplaceWebService.dll
-D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService\bin\Release\MarketplaceWebService.pdb
-D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService\obj\Release\MarketplaceWebService.dll
-D:\Richard\progarm_src\mws\mws\MWSWebSolution\MarketplaceWebService\obj\Release\MarketplaceWebService.pdb
