@@ -10,7 +10,7 @@
 namespace LabelPrintingInterface.Reports {
     
     
-    public partial class TotalCurrentInventory {
+    public partial class DailyNetProfit {
         
         /// <summary>
         /// Panel1 control.
@@ -22,40 +22,31 @@ namespace LabelPrintingInterface.Reports {
         protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// SearchBox control.
+        /// NetProfitDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox SearchBox;
+        protected global::System.Web.UI.WebControls.ObjectDataSource NetProfitDataSource;
         
         /// <summary>
-        /// SearchImageButton1 control.
+        /// AmazonAccountDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton SearchImageButton1;
+        protected global::System.Web.UI.WebControls.ObjectDataSource AmazonAccountDataSource;
         
         /// <summary>
-        /// ObjectDataSource1 control.
+        /// NetProfitDayPeriodDataSource1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource1;
-        
-        /// <summary>
-        /// ObjectDataSource2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource ObjectDataSource2;
+        protected global::System.Web.UI.WebControls.ObjectDataSource NetProfitDayPeriodDataSource1;
         
         /// <summary>
         /// _repostcheckcode control.
@@ -74,6 +65,24 @@ namespace LabelPrintingInterface.Reports {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
+        /// DropDownList2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
         
         /// <summary>
         /// ListView1 control.
