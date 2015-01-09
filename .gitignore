@@ -31,3 +31,7 @@ MWSWebSolution/DebugLogHandler/obj/Debug/DebugLogHandler.csproj.FileListAbsolute
 *.csproj
 *.cache
 *.exe
+*.txt
+*.txt
+*.dll
+*.pdb

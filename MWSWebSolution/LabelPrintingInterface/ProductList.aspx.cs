@@ -22,7 +22,15 @@ namespace LabelPrintingInterface
 
         protected void Page_Init(object sender, EventArgs e)
         {
-
+            if (!this.Page.User.Identity.IsAuthenticated)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+            }
+            else
+            {
+                Session["UserID"] = this.Page.User.Identity.Name;
+            }
+            
             //_connectionString = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
             if (IsPostBack == false)
             {
@@ -124,11 +132,10 @@ namespace LabelPrintingInterface
         protected void Page_Load(object sender, EventArgs e)
         {
             //  CancelUnexpectedRePost();
-            if (!this.Page.User.Identity.IsAuthenticated)
+            if (Session["UserID"] == "" || Session["UserID"] == null)
             {
                 FormsAuthentication.RedirectToLoginPage();
             }
-
         }
 
         private void UpdateCurrentQuantity2PrintList(ListView currentList)
@@ -367,6 +374,23 @@ namespace LabelPrintingInterface
         {
             string sKeyWord = this.SearchBox.Text;  //sKeyWord can be ASIN or FNSKU
             SearchItem(sKeyWord);
+        }
+
+        protected void DropDownList1_TextChanged(object sender, EventArgs e)
+        {
+            this.ListView1.DataSourceID = "";
+            this.ListView1.DataSource = null;
+            this.ObjectDataSource1.Select();
+            this.ListView1.DataSource = this.ObjectDataSource1;
+            this.ListView1.DataBind();
+        }
+
+        protected void AmazonAccountDataSource2_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
+        {
+            if (!this.Page.User.Identity.IsAuthenticated)
+            {
+                e.Cancel = true;
+            }
         }
 
     }
