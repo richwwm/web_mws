@@ -12,16 +12,30 @@ namespace LabelPrintingInterface.Reports
     public partial class TotalCurrentInventory : System.Web.UI.Page
     {
 
-
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Init(object sender, EventArgs e)
         {
             if (!this.Page.User.Identity.IsAuthenticated)
             {
                 FormsAuthentication.RedirectToLoginPage();
             }
+            else
+            {
+                Session["UserID"] = this.Page.User.Identity.Name;
+            }
+
+            Session["SortedBy"] = "";
+
         }
 
-        protected void SearchImageButton1_Click(object sender, ImageClickEventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (Session["UserID"] == "" || Session["UserID"] == null)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+            }
+        }
+
+        private void DoSearchProduct()
         {
             string sKeyWord = this.SearchBox.Text;  //sKeyWord can be ASIN or FNSKU
             sKeyWord = sKeyWord.Trim();
@@ -54,14 +68,17 @@ namespace LabelPrintingInterface.Reports
             }
         }
 
+        protected void SearchImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+            DoSearchProduct();
+        }
+
         private string RemoveExtraText(string value)
         {
             var allowedChars = "01234567890.,";
             return new string(value.Where(c => allowedChars.Contains(c)).ToArray());
         }
-
-
-
+        
         protected void ListView1_PreRender(object sender, EventArgs e)
         {
 
@@ -106,9 +123,12 @@ namespace LabelPrintingInterface.Reports
             Label totalFulfillableLbl = (Label)this.ListView1.FindControl("TotalFulfillableLabel");
             Label totalCountLbl = (Label)this.ListView1.FindControl("TotalCountLabel");
 
-            totalInboundLbl.Text = dPageInboundTotal.ToString("C");
-            totalFulfillableLbl.Text = dPageFulfillableTotal.ToString("C");
-            totalCountLbl.Text = dPageTotal.ToString("C");
+            if(null != totalInboundLbl)
+                totalInboundLbl.Text = dPageInboundTotal.ToString("C");
+            if (null != totalFulfillableLbl)
+                totalFulfillableLbl.Text = dPageFulfillableTotal.ToString("C");
+            if (null != totalCountLbl)
+                totalCountLbl.Text = dPageTotal.ToString("C");
         }
 
         protected void ListView1tiesChanged(object sender, EventArgs e)
@@ -152,11 +172,39 @@ namespace LabelPrintingInterface.Reports
                     this.ListView1.DataBind();
                 }
             }
+            else
+                Session["SortedBy"] = "";
         }
 
         protected void ListView1_Sorting(object sender, ListViewSortEventArgs e)
         {
             //this cannot be deleted , to handle the sorting event
         }
+        
+        protected void DropDownList1_TextChanged(object sender, EventArgs e)
+        {
+            this.ListView1.DataSource = null;
+            this.ObjectDataSource1.Select();
+            this.ListView1.DataSource = this.ObjectDataSource1;
+            this.ListView1.DataBind();
+            DoSearchProduct();
+        }
+
+        protected void ObjectDataSource1_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
+        {
+            if (!this.Page.User.Identity.IsAuthenticated)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        protected void ObjectDataSource2_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
+        {
+            if (!this.Page.User.Identity.IsAuthenticated)
+            {
+                e.Cancel = true;
+            }
+        }
+
     }
 }

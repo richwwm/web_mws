@@ -40,7 +40,8 @@ namespace LabelPrintingInterface
             if (e.Item.Text == "Logout")
             {
                 FormsAuthentication.SignOut();
-                FormsAuthentication.RedirectToLoginPage();
+                Response.Clear();
+                Response.Redirect("~/login.aspx");
             }
         }
 

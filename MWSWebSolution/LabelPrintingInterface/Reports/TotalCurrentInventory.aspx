@@ -14,15 +14,34 @@
                 OnClick="SearchImageButton1_Click" Width="45px" /></div>
     </div>
     <asp:ObjectDataSource ID="ObjectDataSource1" runat="server" SelectMethod="GetAllSortedDataByMerchantID"
-        TypeName="LabelPrintingInterface.TotalCurrentInventoryDataSource">
+        TypeName="LabelPrintingInterface.TotalCurrentInventoryDataSource" 
+        onselecting="ObjectDataSource1_Selecting">
         <SelectParameters>
             <asp:SessionParameter DefaultValue="SellerSKU ASC" Name="sortExpression" 
                 SessionField="SortedBy" Type="String" />
-            <asp:SessionParameter Name="sMerchantID" SessionField="MerchantID" 
-                Type="String" />
+            <asp:ControlParameter ControlID="DropDownList1" DefaultValue="" 
+                Name="sMerchantID" PropertyName="SelectedValue" Type="String" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="ObjectDataSource2" runat="server" 
+        SelectMethod="GetAmazonAccountListByUserID" 
+        TypeName="LabelPrintingInterface.AmazonAccountDataSource" 
+        onselecting="ObjectDataSource2_Selecting">
+        <SelectParameters>
+            <asp:SessionParameter Name="sUserID" SessionField="UserID" Type="String" />
         </SelectParameters>
     </asp:ObjectDataSource>
     <asp:HiddenField runat="server" ID="_repostcheckcode" />
+    <div align="left" style="width: 1042px">
+    <asp:Label Text="Viewing Amazon account:" runat="server" style="font-weight: 700"/>
+        <asp:DropDownList ID="DropDownList1" runat="server" Height="17px" Width="193px" 
+            DataSourceID="ObjectDataSource2" AutoPostBack="True" 
+            DataTextField="description" DataValueField="MerchantID" 
+            ontextchanged="DropDownList1_TextChanged">
+
+    </asp:DropDownList>
+    </div>
+
     <asp:ListView ID="ListView1" runat="server" DataSourceID="ObjectDataSource1"
         OnPreRender="ListView1_PreRender" OnItemCommand="ListView1_ItemCommand1"
         OnSorting="ListView1_Sorting">

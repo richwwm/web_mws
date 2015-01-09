@@ -15,8 +15,7 @@ namespace MWSServer
     class ReportRequestHandler
     {
         string sLogPath = Directory.GetCurrentDirectory() + "\\";
-        string sClass = "Main.cs";
-        private string _sClass = "ReportRequestHandler.cs";
+        string sClass = "ReportRequestHandler.cs";
         private string _sLogPath = System.IO.Directory.GetCurrentDirectory() + "\\";
         MarketplaceWebService.MarketplaceWebService service;
         MWSUserProfile _currentProfile;
@@ -71,8 +70,63 @@ namespace MWSServer
 
             _currentProfile = profile;
         }
-        public void GenerateReport(string sReportType)
+
+        private DataTable AssignReport2DataTable(string sReportType, Stream reportStream)
         {
+            int iColumnCount = 0;
+            DataTable tempDataTable;
+            if (String.IsNullOrEmpty(sReportType))
+                tempDataTable = new DataTable("temp");
+            else
+                tempDataTable = new DataTable(sReportType);
+            try
+            {
+
+                StreamReader strReader = new StreamReader(reportStream);
+                int iLine = 0;
+                while (strReader.Peek() >= 0)
+                {
+                    if (iLine == 0)
+                    {
+                        string sDataColumnHeader = strReader.ReadLine();
+                        string[] sColumns = sDataColumnHeader.Split('\t');
+                        foreach (string col in sColumns)
+                        {
+                            string colName = col.Replace('-', '_');
+                            tempDataTable.Columns.Add(colName, typeof(String));
+                            iColumnCount++;
+                        }
+                    }
+                    else
+                    {
+                        string sDataRow = strReader.ReadLine();
+                        DataRow reportDataRow = tempDataTable.NewRow();
+                        string[] sDataList = sDataRow.Split('\t');
+
+                        for (int i = 0; i < iColumnCount; i++)
+                        {
+                            reportDataRow[i] = sDataList[i];
+                        }
+
+                        tempDataTable.Rows.Add(reportDataRow);
+                    }
+
+                    iLine++;
+                }
+
+                strReader.Close();
+            }
+            catch (Exception ex)
+            {
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "AssignReport2DataTable() exception:" + ex.Message);
+            }
+            return tempDataTable;
+        }
+
+
+        public DataTable GenerateReport(string sReportType, DateTime startDate = new DateTime(), DateTime endDate = new DateTime())
+        {
+            DataTable reportTable = null;
             try
             {
                 string sReportRequestID;
@@ -81,8 +135,10 @@ namespace MWSServer
                 _requestReportRequest.MarketplaceIdList = new IdList();
                 _requestReportRequest.MarketplaceIdList.Id = new List<string>(new string[] { _currentProfile.SMarketplaceId });
                 _requestReportRequest.ReportType = sReportType;
-                _requestReportRequest.StartDate = DateTime.Today;
-                _requestReportRequest.EndDate = DateTime.Now;
+                if (new DateTime() != startDate)
+                    _requestReportRequest.StartDate = startDate;
+                if (new DateTime() != endDate)
+                    _requestReportRequest.EndDate = endDate;
                 sReportRequestID = InvokeRequestReport(service, _requestReportRequest);
 
                 GetReportRequestListRequest _getReportRequestListRequest = new GetReportRequestListRequest();
@@ -105,44 +161,42 @@ namespace MWSServer
                         reportListInfo = InvokeGetReportList(service, _getReportListRequest);
                         foreach (ReportInfo reportID in reportListInfo)
                         {
-                            int reportNumber = 0;
-
-
                             GetReportRequest reportRequest = new GetReportRequest();
                             reportRequest.Marketplace = _currentProfile.SMarketplaceId;
                             reportRequest.Merchant = _currentProfile.SSellerId;
                             reportRequest.ReportId = reportID.ReportId;
-                            reportRequest.Report = File.Open("_report_" + reportNumber.ToString() + ".xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                            reportRequest.Report = new MemoryStream();
                             InvokeGetReport(service, reportRequest);
                             DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "GenerateReport() start generate report");
-                            reportNumber++;
-
+                            reportTable = AssignReport2DataTable(sReportType, reportRequest.Report);
+                            DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "GenerateReport() end generate report");
+                            reportRequest.Report = null;
                         }
                     }
                     else
                     {
-                        int reportNumber = 0;
 
 
                         GetReportRequest reportRequest = new GetReportRequest();
                         reportRequest.Marketplace = _currentProfile.SMarketplaceId;
                         reportRequest.Merchant = _currentProfile.SSellerId;
                         reportRequest.ReportId = reportInfo.GeneratedReportId;
-                        reportRequest.Report = File.Open("report_" + reportNumber.ToString() + ".xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                        reportRequest.Report = new MemoryStream();
                         InvokeGetReport(service, reportRequest);
                         DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "GenerateReport() start generate report");
-                        reportNumber++;
+                        reportTable = AssignReport2DataTable(sReportType, reportRequest.Report);
+                        DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "GenerateReport() nd generate report");
+                        reportRequest.Report = null;
                     }
 
                 }
-
-                // InvokeGetReportList(service, _getReportListRequest);
-                // InvokeManageReportSchedule(service, _manageReportScheduleRequest);
             }
             catch (MarketplaceWebServiceException ex)
             {
-
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, " GenerateReport exception:" + ex.Message);
             }
+
+            return reportTable;
         }
         public void ScheduleReportRequest(string sReportType, string sPeriod)
         {
@@ -159,22 +213,30 @@ namespace MWSServer
             }
             catch (MarketplaceWebServiceException mwsEx)
             {
-                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "ScheduleReportRequest() exception message:"+mwsEx.Message);
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "ScheduleReportRequest() exception message:" + mwsEx.Message);
             }
 
         }
 
-        public DataTable GetScheduledReport(string sReportType)
+
+
+        public List<DataTable> GetScheduledReport(string sReportType, DateTime startDate = new DateTime(), DateTime endDate = new DateTime())
         {
             //Manage Report Schedule
-            DataTable reportTable = new DataTable(sReportType);
+            //DataTable reportTable = new DataTable(sReportType);
+            List<DataTable> reportTableList = new List<DataTable>();
+            DataTable reportTable = null;
             try
             {
                 GetReportListRequest _getReportListRequest = new GetReportListRequest();
                 _getReportListRequest.Merchant = _currentProfile.SSellerId;
                 _getReportListRequest.Marketplace = _currentProfile.SMarketplaceId;
+                _getReportListRequest.MaxCount = 100;
+                if(startDate != new DateTime())
+                    _getReportListRequest.AvailableFromDate = startDate;
+                if(endDate != new DateTime())
+                    _getReportListRequest.AvailableToDate = endDate;
                 TypeList reportTypeList = new TypeList();
-                reportTypeList.Type = new List<string>();
                 reportTypeList.Type.Add(sReportType);
 
                 List<ReportInfo> reportListInfo = InvokeGetReportList(service, _getReportListRequest);
@@ -186,58 +248,29 @@ namespace MWSServer
                 request.ReportIdList = new IdList();
                 request.ReportIdList.Id = new List<string>();
                 int reportNumber = 0;
-
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "GetScheduledReport() Report number in report list:" + reportListInfo.Count);
                 foreach (ReportInfo info in reportListInfo)
                 {
-                    if (info.ReportType == sReportType && info.Acknowledged == false)
-                    //if (info.ReportType == sReportType)
+                    // if (info.ReportType == sReportType && info.Acknowledged == false)
+                    if (info.ReportType == sReportType)
                     {
 
                         GetReportRequest reportRequest = new GetReportRequest();
                         reportRequest.Marketplace = _currentProfile.SMarketplaceId;
                         reportRequest.Merchant = _currentProfile.SSellerId;
                         reportRequest.ReportId = info.ReportId;
-                        //reportRequest.Report = File.Open("report_" + info.ReportType + "_" + DateTime.Now.ToString("MM_dd_yyyy_HH_mm_ss") + ".xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
                         reportRequest.Report = new MemoryStream();
                         sTemp = InvokeGetReport(service, reportRequest);
-                        StreamReader strReader = new StreamReader(reportRequest.Report);
-                        int iLine = 0;
-                        while (strReader.Peek() >= 0)
-                        {
-                            if (iLine == 0)
-                            {
-                                string sDataColumnHeader = strReader.ReadLine();
-                                string[] sColumns = sDataColumnHeader.Split('\t');
-                                foreach (string col in sColumns)
-                                {
-                                    reportTable.Columns.Add(col, typeof(String));
-                                }
-                            }
-                            else
-                            {
-                                string sDataRow = strReader.ReadLine();
-                                //breakdown data and insert to sql database
-                                DataRow reportDataRow = reportTable.NewRow();
-                                string[] sDataList = sDataRow.Split('\t');
-
-                                int iRowIndex = 0;
-                                foreach (string data in sDataList)
-                                {
-                                    reportDataRow[iRowIndex] = data;
-                                    iRowIndex++;
-                                }
-
-                                reportTable.Rows.Add(reportDataRow);
-                            }
-
-                            iLine++;
-                        }
-
-                        strReader.Close();
+                        reportTable = AssignReport2DataTable(sReportType, reportRequest.Report);
+                        if (reportTable != null)
+                            reportTableList.Add(reportTable);
                         reportRequest.Report = null;
                         request.ReportIdList.Id.Add(info.ReportId);
                         reportNumber++;
                     }
+
+
+
                 }
 
                 if (request.ReportIdList.Id.Count > 0)
@@ -249,7 +282,7 @@ namespace MWSServer
                 DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "ScheduleReportRequest() exception message:" + mwsEx.Message);
             }
 
-            return reportTable;
+            return reportTableList;
         }
 
         private List<ReportRequestInfo> InvokeGetReportRequestList(MarketplaceWebService.MarketplaceWebService service, GetReportRequestListRequest request)
@@ -259,6 +292,12 @@ namespace MWSServer
             {
                 GetReportRequestListResponse response = service.GetReportRequestList(request);
 
+                if (response != null)
+                {
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeGetReportRequestList() response");
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, response.ToXML());
+                }
+
 
                 Console.WriteLine("Service Response");
                 Console.WriteLine("=============================================================================");
@@ -266,23 +305,31 @@ namespace MWSServer
 
                 Console.WriteLine("        GetReportRequestListResponse");
 
+
                 if (response.IsSetGetReportRequestListResult())
                 {
                     Console.WriteLine("            GetReportRequestListResult");
                     GetReportRequestListResult getReportRequestListResult = response.GetReportRequestListResult;
                     reportRequestInfoList = getReportRequestListResult.ReportRequestInfo;
-                    while (reportRequestInfoList[0].ReportProcessingStatus != "_DONE_")
+                    string status = reportRequestInfoList[0].ReportProcessingStatus;
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeGetReportRequestList() report[0] request status  = " + status);
+                    while (status != "_DONE_")
                     {
-                        Thread.Sleep(20000);
-                        if (reportRequestInfoList[0].ReportProcessingStatus == "_CANCELLED_")
-                        {
-                            DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeGetReportRequestList() report[0] request status  = " + reportRequestInfoList[0].ReportProcessingStatus);
+                        if (status == "_DONE_NO_DATA_" || status == "_CANCELLED_")
                             break;
-                        }
+                        Thread.Sleep(1000* 60 * 1);
                         response = service.GetReportRequestList(request);
+                        if (response != null)
+                        {
+                            DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeGetReportRequestList() response");
+                            DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, response.ToXML());
+                        }
                         getReportRequestListResult = response.GetReportRequestListResult;
                         reportRequestInfoList = getReportRequestListResult.ReportRequestInfo;
+                        status = reportRequestInfoList[0].ReportProcessingStatus;
                     }
+
+
                     if (getReportRequestListResult.IsSetNextToken())
                     {
 
@@ -334,6 +381,7 @@ namespace MWSServer
                 Console.WriteLine("Request ID: " + ex.RequestId);
                 Console.WriteLine("XML: " + ex.XML);
                 Console.WriteLine("ResponseHeaderMetadata: " + ex.ResponseHeaderMetadata);
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, " InvokeGetReportRequestList exception:" + ex.Message);
             }
             return reportRequestInfoList;
         }
@@ -358,12 +406,16 @@ namespace MWSServer
                     reportRequestInfoList = getReportRequestListByNextTokenResult.ReportRequestInfo;
                     foreach (ReportRequestInfo reportInfo in reportRequestInfoList)
                     {
-                        while (reportInfo.ReportProcessingStatus != "_DONE_")
+                        string status = reportInfo.ReportProcessingStatus;
+                        while (status != "_DONE_")
                         {
+                            if (status != "_DONE_NO_DATA_" && status != "_CANCELLED_")
+                                break;
                             Thread.Sleep(20000);
                             response = service.GetReportRequestListByNextToken(request);
                             getReportRequestListByNextTokenResult = response.GetReportRequestListByNextTokenResult;
                             reportRequestInfoList = getReportRequestListByNextTokenResult.ReportRequestInfo;
+                            status = reportInfo.ReportProcessingStatus;
                         }
                     }
                     if (getReportRequestListByNextTokenResult.IsSetNextToken())
@@ -417,6 +469,7 @@ namespace MWSServer
                 Console.WriteLine("Request ID: " + ex.RequestId);
                 Console.WriteLine("XML: " + ex.XML);
                 Console.WriteLine("ResponseHeaderMetadata: " + ex.ResponseHeaderMetadata);
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeGetReportRequestListByNextToken exception:" + ex.Message);
             }
             return reportRequestInfoList;
         }
@@ -427,6 +480,11 @@ namespace MWSServer
             {
                 UpdateReportAcknowledgementsResponse response = service.UpdateReportAcknowledgements(request);
 
+                if (response != null)
+                {
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeUpdateReportAcknowledgements() response");
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, response.ToXML());
+                }
 
                 Console.WriteLine("Service Response");
                 Console.WriteLine("=============================================================================");
@@ -507,6 +565,7 @@ namespace MWSServer
                 Console.WriteLine("Request ID: " + ex.RequestId);
                 Console.WriteLine("XML: " + ex.XML);
                 Console.WriteLine("ResponseHeaderMetadata: " + ex.ResponseHeaderMetadata);
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeUpdateReportAcknowledgements exception:" + ex.Message);
             }
         }
 
@@ -515,6 +574,12 @@ namespace MWSServer
             try
             {
                 ManageReportScheduleResponse response = service.ManageReportSchedule(request);
+
+                if (response != null)
+                {
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeManageReportSchedule() response");
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, response.ToXML());
+                }
 
                 if (response.IsSetManageReportScheduleResult())
                 {
@@ -575,16 +640,27 @@ namespace MWSServer
                 Console.WriteLine("Request ID: " + ex.RequestId);
                 Console.WriteLine("XML: " + ex.XML);
                 Console.WriteLine("ResponseHeaderMetadata: " + ex.ResponseHeaderMetadata);
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeManageReportSchedule exception:" + ex.Message);
             }
         }
 
         private List<ReportInfo> InvokeGetReportList(MarketplaceWebService.MarketplaceWebService service, GetReportListRequest request)
         {
+            if (request != null)
+            {
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeGetReportList() request");
+            }
+
             List<ReportInfo> reportInfoList = new List<ReportInfo>();
             try
             {
                 GetReportListResponse response = service.GetReportList(request);
 
+                if (response != null)
+                {
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeGetReportList() response");
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, response.ToXML());
+                }
 
                 Console.WriteLine("Service Response");
                 Console.WriteLine("=============================================================================");
@@ -597,8 +673,10 @@ namespace MWSServer
                     Console.WriteLine("            GetReportListResult");
 
                     GetReportListResult getReportListResult = response.GetReportListResult;
-                    reportInfoList = getReportListResult.ReportInfo;
-
+                    foreach (ReportInfo info in getReportListResult.ReportInfo)
+                    {
+                        reportInfoList.Add(info);
+                    }
                     if (getReportListResult.IsSetNextToken())
                     {
                         Console.WriteLine("                NextToken");
@@ -616,8 +694,14 @@ namespace MWSServer
                     {
                         GetReportListByNextTokenRequest getNextTokenRequest = new GetReportListByNextTokenRequest();
                         getNextTokenRequest.NextToken = getReportListResult.NextToken;
+
+                        getNextTokenRequest.Merchant = request.Merchant;
+                        Thread.Sleep(1000 * 45);
                         List<ReportInfo> nextTokenReportList = InvokeGetReportListByNextToken(service, getNextTokenRequest);
-                        reportInfoList.Concat(nextTokenReportList);
+                        foreach (ReportInfo info in nextTokenReportList)
+                        {
+                            reportInfoList.Add(info);
+                        }
                     }
 
                 }
@@ -641,6 +725,7 @@ namespace MWSServer
                 Console.WriteLine("Request ID: " + ex.RequestId);
                 Console.WriteLine("XML: " + ex.XML);
                 Console.WriteLine("ResponseHeaderMetadata: " + ex.ResponseHeaderMetadata);
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeGetReportList exception:" + ex.Message);
             }
             return reportInfoList;
         }
@@ -651,6 +736,12 @@ namespace MWSServer
             try
             {
                 GetReportListByNextTokenResponse response = service.GetReportListByNextToken(request);
+
+                if (response != null)
+                {
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeGetReportListByNextToken() response");
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, response.ToXML());
+                }
 
 
                 Console.WriteLine("Service Response");
@@ -663,7 +754,11 @@ namespace MWSServer
 
                     Console.WriteLine("            GetReportListByNextTokenResult");
                     GetReportListByNextTokenResult getReportListByNextTokenResult = response.GetReportListByNextTokenResult;
-                    nextTokenReportList = getReportListByNextTokenResult.ReportInfo;
+
+                    foreach (ReportInfo info in getReportListByNextTokenResult.ReportInfo)
+                    {
+                        nextTokenReportList.Add(info);
+                    }
                     if (getReportListByNextTokenResult.IsSetNextToken())
                     {
                         Console.WriteLine("                NextToken");
@@ -678,8 +773,15 @@ namespace MWSServer
 
                     if (!string.IsNullOrEmpty(getReportListByNextTokenResult.NextToken))
                     {
+                        Thread.Sleep(1000 * 2);
+                        
                         request.NextToken = getReportListByNextTokenResult.NextToken;
-                        nextTokenReportList.Concat(InvokeGetReportListByNextToken(service, request));
+                        List<ReportInfo> nextTokenReportList2 = new List<ReportInfo>();
+                        nextTokenReportList2 = InvokeGetReportListByNextToken(service, request);
+                        foreach (ReportInfo info in nextTokenReportList2)
+                        {
+                            nextTokenReportList.Add(info);
+                        }
                     }
                 }
                 if (response.IsSetResponseMetadata())
@@ -711,6 +813,7 @@ namespace MWSServer
                 Console.WriteLine("Request ID: " + ex.RequestId);
                 Console.WriteLine("XML: " + ex.XML);
                 Console.WriteLine("ResponseHeaderMetadata: " + ex.ResponseHeaderMetadata);
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeGetReportListByNextToken exception:" + ex.Message);
             }
 
             return nextTokenReportList;
@@ -723,6 +826,11 @@ namespace MWSServer
             {
                 RequestReportResponse response = service.RequestReport(request);
 
+                if (response != null)
+                {
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeRequestReport() response");
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, response.ToXML());
+                }
 
                 Console.WriteLine("Service Response");
                 Console.WriteLine("=============================================================================");
@@ -798,17 +906,106 @@ namespace MWSServer
                 Console.WriteLine("Request ID: " + ex.RequestId);
                 Console.WriteLine("XML: " + ex.XML);
                 Console.WriteLine("ResponseHeaderMetadata: " + ex.ResponseHeaderMetadata);
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeRequestReport exception:" + ex.Message);
             }
 
             return sResult;
         }
+
+        private void InvokeGetReportScheduleList(MarketplaceWebService.MarketplaceWebService service, GetReportScheduleListRequest request)
+        {
+            try
+            {
+                GetReportScheduleListResponse response = service.GetReportScheduleList(request);
+                if (response != null)
+                {
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeGetReportScheduleList() response");
+                    DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, response.ToXML());
+                }
+
+                Console.WriteLine("Service Response");
+                Console.WriteLine("=============================================================================");
+                Console.WriteLine();
+
+                Console.WriteLine("        GetReportScheduleListResponse");
+                if (response.IsSetGetReportScheduleListResult())
+                {
+                    Console.WriteLine("            GetReportScheduleListResult");
+                    GetReportScheduleListResult getReportScheduleListResult = response.GetReportScheduleListResult;
+                    if (getReportScheduleListResult.IsSetNextToken())
+                    {
+                        Console.WriteLine("                NextToken");
+                        Console.WriteLine("                    {0}", getReportScheduleListResult.NextToken);
+                    }
+                    if (getReportScheduleListResult.IsSetHasNext())
+                    {
+                        Console.WriteLine("                HasNext");
+                        Console.WriteLine("                    {0}", getReportScheduleListResult.HasNext);
+                    }
+                    List<ReportSchedule> reportScheduleList = getReportScheduleListResult.ReportSchedule;
+                    foreach (ReportSchedule reportSchedule in reportScheduleList)
+                    {
+                        Console.WriteLine("                ReportSchedule");
+                        if (reportSchedule.IsSetReportType())
+                        {
+                            Console.WriteLine("                    ReportType");
+                            Console.WriteLine("                        {0}", reportSchedule.ReportType);
+                        }
+                        if (reportSchedule.IsSetSchedule())
+                        {
+                            Console.WriteLine("                    Schedule");
+                            Console.WriteLine("                        {0}", reportSchedule.Schedule);
+                        }
+                        if (reportSchedule.IsSetScheduledDate())
+                        {
+                            Console.WriteLine("                    ScheduledDate");
+                            Console.WriteLine("                        {0}", reportSchedule.ScheduledDate);
+                        }
+                    }
+                }
+                if (response.IsSetResponseMetadata())
+                {
+                    Console.WriteLine("            ResponseMetadata");
+                    ResponseMetadata responseMetadata = response.ResponseMetadata;
+                    if (responseMetadata.IsSetRequestId())
+                    {
+                        Console.WriteLine("                RequestId");
+                        Console.WriteLine("                    {0}", responseMetadata.RequestId);
+                    }
+                }
+
+                Console.WriteLine("            ResponseHeaderMetadata");
+                Console.WriteLine("                RequestId");
+                Console.WriteLine("                    " + response.ResponseHeaderMetadata.RequestId);
+                Console.WriteLine("                ResponseContext");
+                Console.WriteLine("                    " + response.ResponseHeaderMetadata.ResponseContext);
+                Console.WriteLine("                Timestamp");
+                Console.WriteLine("                    " + response.ResponseHeaderMetadata.Timestamp);
+
+            }
+            catch (MarketplaceWebServiceException ex)
+            {
+                Console.WriteLine("Caught Exception: " + ex.Message);
+                Console.WriteLine("Response Status Code: " + ex.StatusCode);
+                Console.WriteLine("Error Code: " + ex.ErrorCode);
+                Console.WriteLine("Error Type: " + ex.ErrorType);
+                Console.WriteLine("Request ID: " + ex.RequestId);
+                Console.WriteLine("XML: " + ex.XML);
+                Console.WriteLine("ResponseHeaderMetadata: " + ex.ResponseHeaderMetadata);
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeGetReportScheduleList exception:" + ex.Message);
+            }
+        }
+
+
+
         private string InvokeGetReport(MarketplaceWebService.MarketplaceWebService service, GetReportRequest request)
         {
             string sReportContent = "";
             try
             {
+                Thread.Sleep(1000 * 30); // to avoid achieve maximum request quota of 15 and a restore rate of one request every minute.
                 GetReportResponse response = service.GetReport(request);
-
+                Thread.Sleep(1000 * 30); // to avoid achieve maximum request quota of 15 and a restore rate of one request every minute.
 
                 Console.WriteLine("Service Response");
                 Console.WriteLine("=============================================================================");
@@ -855,6 +1052,7 @@ namespace MWSServer
                 Console.WriteLine("Request ID: " + ex.RequestId);
                 Console.WriteLine("XML: " + ex.XML);
                 Console.WriteLine("ResponseHeaderMetadata: " + ex.ResponseHeaderMetadata);
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "InvokeGetReport exception:" + ex.Message);
             }
             return sReportContent;
         }
