@@ -29,6 +29,9 @@
                         <asp:MenuItem NavigateUrl="~/Reports/TotalCurrentInventory.aspx" 
                             Text="Total Current Inventory Value" Value="Total Current Inventory Value">
                         </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Reports/DailyNetProfit.aspx" 
+                            Text="Daily Net Profit Report" Value="Daily Net Profit Report">
+                        </asp:MenuItem>
                     </asp:MenuItem>
                     <asp:MenuItem Text="Logout" Value="Logout"></asp:MenuItem>
                 </Items>

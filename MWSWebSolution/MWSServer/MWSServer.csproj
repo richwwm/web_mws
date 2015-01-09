@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AmazonInventoryDataSource.cs" />
+    <Compile Include="CurrencyRateHandler.cs" />
     <Compile Include="MWSUserProfile.cs" />
     <Compile Include="ReportRequestHandler.cs" />
     <Compile Include="Settings.cs" />
