@@ -119,4 +119,36 @@ namespace LabelPrintingInterface.DataSource
             }
         }
     }
+
+    public class PrintJob
+    {
+        string _connectionString;
+        public PrintJob()
+        {
+            _connectionString = "Data Source=192.168.103.150\\INFLOWSQL;Initial Catalog=MWS;User ID=mws;Password=p@ssw0rd";
+        }
+
+        public void AddPrintJobByTable(DataTable table)
+        {
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                con.Open();
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    foreach (DataRow row in table.Rows)
+                    {
+                        SqlCommand cmd = new SqlCommand("AddPrintJob");
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@Line1", row["FNSKU"]);
+                        cmd.Parameters.AddWithValue("@Line2", row["SellerSKU"]);
+                        cmd.Parameters.AddWithValue("@Quantity", row["PrintQuantity"]);
+                        cmd.Connection = con;
+                        sda.InsertCommand = cmd;             
+                        sda.InsertCommand.ExecuteNonQuery();
+                    }
+                }
+                con.Close();
+            }
+        }
+    }
 }

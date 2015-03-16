@@ -40,12 +40,12 @@ namespace LabelPrintingInterface
         //    return GetAllSortedDataByMerchantID("");
         //}
 
-        public DataSet GetAllSortedDataByMerchantID(string sortExpression,string sMerchantID)
+        public DataSet GetAllSortedData(string sortExpression)
         {
-            return GetAllSortedData("");
+            return GetAllSortedDataByMerchantID(sortExpression, "");
         }
 
-        public DataSet GetAllSortedData(string sortExpression)
+        public DataSet GetAllSortedDataByMerchantID(string sortExpression, string sMerchantID)
         {
             string sSelectQuery = "SELECT [MWS].[dbo].[ProductAvailability].[FNSKU] AS " + '"' + "FNSKU" + '"'
                  + ",[inFlow].[dbo].[BASE_Product].[Name] AS " + '"' + "SellerSKU" + '"'

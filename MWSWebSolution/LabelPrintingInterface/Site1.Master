@@ -24,7 +24,11 @@
                 <DynamicSelectedStyle BackColor="#507CD1" />
                 <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
                 <Items>
-                    <asp:MenuItem Text="Product" Value="Product" NavigateUrl="~/ProductList.aspx"></asp:MenuItem>
+                    <asp:MenuItem Text="Product" Value="Product" NavigateUrl="~/ProductList.aspx">
+                        <asp:MenuItem NavigateUrl="~/DownloadFile.ashx" 
+                            Text="Label Print Service Installer">
+                        </asp:MenuItem>
+                    </asp:MenuItem>
                     <asp:MenuItem Text="Reports" Value="Reports" NavigateUrl="~/Main.aspx">
                         <asp:MenuItem NavigateUrl="~/Reports/TotalCurrentInventory.aspx" 
                             Text="Total Current Inventory Value" Value="Total Current Inventory Value">
