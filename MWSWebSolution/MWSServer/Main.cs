@@ -135,59 +135,108 @@ namespace MWSServer
         {
             bool doWork = (bool)threadpara;
             SqlDataHandler profileHandler = new SqlDataHandler(_ConnectionString);
-            profileList = profileHandler.GetAWSLoginProfile();
             int iInventoryCostHistoryRowsAffected = 0;
-            DateTime finishedRoutineDateTime = new DateTime();
             while (threadParameterList[0])
             {
-                GetCurrencyExchangeRate();
+                profileList = profileHandler.GetAWSLoginProfile();
+                //ManualInputData();
+                //GetCurrencyExchangeRate();
 
-                if (finishedRoutineDateTime.Date != DateTime.Now.Date)
-                    iInventoryCostHistoryRowsAffected = GetInventoryCost();
                 foreach (MWSUserProfile profile in profileList)
                 {
+                    //iInventoryCostHistoryRowsAffected = GetInventoryCost(profile.SSellerId);
+
                     profile.SServiceURL = MWSServer.Properties.Settings.Default["MWS_ServiceURL"].ToString();
-                    if (DateTime.Now.Hour > 0 && DateTime.Now.Hour < 3)
-                        GetTransactionData(profile);
-                    else
-                        GetUpdatedInventoryData(profile);
+                    //if (DateTime.Now.Hour > 0 && DateTime.Now.Hour < 3)
+                    //{
+                    //    List<string> tempList = new List<string>();
+                    //    tempList = GetTransactionData(profile);
+                    //    //tempList.Add("5822760641");
+                    //    if (tempList.Count > 0)
+                    //    {
+                    //        foreach (string sID in tempList)
+                    //        {
+                    //            List<DateTime> tempPostDateList =
+                    //            GetRawSettlementPostedDate(profile.SSellerId, sID);
+                    //            foreach (DateTime date in tempPostDateList)
+                    //            {
+                    //                if(date.Year != 1900)
+                    //                    UpdateNetProfitData(profile.SSellerId, date);
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    //else
+                    //    GetUpdatedInventoryData(profile)
+                    GetActiveListing(profile);
                     Thread.Sleep(1000 * 5); //sleep 5 secound
                 }
 
-                finishedRoutineDateTime = DateTime.Now;
+
 
                 Thread.Sleep(1000 * 60 * 5); //sleep 5 min
             }
         }
 
-        private int GetInventoryCost()
+
+
+        private List<DateTime> GetRawSettlementPostedDate(string sMerchantID,string sSettlementID)
+        {
+            List<DateTime> postedDateList = new List<DateTime>();
+            SqlDataHandler UpdateNetProfitDataHandler = new SqlDataHandler(_ConnectionString);
+            postedDateList = UpdateNetProfitDataHandler.GetRawSettlementDataPostedDate(sMerchantID, sSettlementID);
+            return postedDateList;
+        }
+        private void ManualInputData()
+        {
+            List<DateTime> manualList = new List<DateTime>();
+            DateTime inputStartDate = new DateTime(2014, 10, 5, 0, 30, 0);
+            DateTime inputEndDate = new DateTime(2015, 3, 13, 0, 30, 0);
+            while (inputStartDate <= inputEndDate)
+            {
+                manualList.Add(inputStartDate);
+                inputStartDate = inputStartDate.AddDays(1);
+            }
+            foreach (MWSUserProfile profile in profileList)
+            {
+                foreach (DateTime date in manualList)
+                {
+                    //MaunalInputInventoryCost(profile.SSellerId, date);
+                    UpdateNetProfitData(profile.SSellerId, date);
+                }
+            }
+        }
+
+        private int MaunalInputInventoryCost(string sMerchantID,DateTime date)
         {
             SqlDataHandler inventoryCostHandler = new SqlDataHandler(_ConnectionString);
-            int iRowsAffected = inventoryCostHandler.UpdateInventoryCostHistory();
+            int iRowsAffected = inventoryCostHandler.UpdateInventoryCostHistoryManual(sMerchantID,date);
 
             if (iRowsAffected > 0)
                 DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "GetInventoryCost() rows affected:" + iRowsAffected);
 
-            Thread.Sleep(1000 * 60 * UPDATE_INVENTORY_COST_PERIOD); //sleep XXX min
             return iRowsAffected;
         }
 
-        private void UpdateNetProfitData(object threadpara)
+        private int GetInventoryCost(string sMerchantID)
         {
-            workerThreadParameter para = (workerThreadParameter)threadpara;
+            SqlDataHandler inventoryCostHandler = new SqlDataHandler(_ConnectionString);
+            int iRowsAffected = inventoryCostHandler.UpdateInventoryCostHistory(sMerchantID);
+
+            if (iRowsAffected > 0)
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "GetInventoryCost() rows affected:" + iRowsAffected);
+
+            return iRowsAffected;
+        }
+
+        private void UpdateNetProfitData(string sMerchantID,DateTime targetDate)
+        {
             int iRowsAffected;
-            while (para.doWork)
-            {
-                DateTime cutoffTime = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, 0, 0, 0);
-                //DateTime startDate = new DateTime(DateTime.UtcNow.Year, 12, 2);
-                //DateTime endDate = startDate.AddDays(1);
-                DateTime startDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, 0, 0, 0);
-                DateTime endDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, 23, 59, 59);
-                SqlDataHandler UpdateNetProfitDataHandler = new SqlDataHandler(_ConnectionString);
-                iRowsAffected = UpdateNetProfitDataHandler.UpdateNetProfitData(startDate, endDate);
-                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "UpdateNetProfitData() rows affected:" + iRowsAffected);
-                Thread.Sleep(1000 * 60 * UPDATE_CURRENCYRATE_PERIOD); //sleep 1 min
-            }
+            DateTime startDate = new DateTime(targetDate.Year, targetDate.Month, targetDate.Day, 0, 0, 0);
+            DateTime endDate = new DateTime(targetDate.Year, targetDate.Month, targetDate.Day, 23, 59, 59);
+            SqlDataHandler UpdateNetProfitDataHandler = new SqlDataHandler(_ConnectionString);
+            iRowsAffected = UpdateNetProfitDataHandler.UpdateNetProfitData(sMerchantID, startDate, endDate);
+            DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "UpdateNetProfitData() rows affected:" + iRowsAffected);
         }
 
         private void GetCurrencyExchangeRate()
@@ -244,12 +293,41 @@ namespace MWSServer
             }
         }
 
+        private void GetActiveListing(MWSUserProfile profile)
+        {
+            List<DataTable> TableList = null;
+            ReportRequestHandler getReportHandler = new ReportRequestHandler(profile);
+            string sReportType = "_GET_MERCHANT_LISTINGS_DATA_";
+            string sPeriod = "_15_MINUTES_";
+            getReportHandler.ScheduleReportRequest(sReportType, sPeriod);
+            string sMechantID = profile.SSellerId;
+            DateTime startedDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 0, 0);
+            DateTime endDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, DateTime.UtcNow.Hour, 59, 59);
+            try
+            {
 
-        private void GetTransactionData(MWSUserProfile profile)
+                TableList = getReportHandler.GetScheduledReport(sReportType, startedDate, endDate);
+                foreach (DataTable InventoryTable in TableList)
+                {
+                    if (InventoryTable != null & InventoryTable.Rows.Count > 0)
+                    {
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "GetActiveListing() exception message:" + ex.Message);
+            }
+        }
+
+        private List<string> GetTransactionData(MWSUserProfile profile)
         {
             string sReportType = "_GET_ALT_FLAT_FILE_PAYMENT_SETTLEMENT_DATA_";
             string sMechantID = profile.SSellerId;
             List<DataTable> srcTableList = null;
+            List<string> settlement_idList = new List<string>();
             ReportRequestHandler getReportHandler = new ReportRequestHandler(profile);
             DateTime reportEndDate = SETTLEMENT_PAYMENT_DATA_ENDDATE;
             DateTime reportStartDate = SETTLEMENT_PAYMENT_DATA_ENDDATE.AddDays(-89);
@@ -294,7 +372,13 @@ namespace MWSServer
                                 foreach (DataColumn col in tableWithMerchantID.Columns)
                                 {
 
-                                    if (col.ColumnName == "posted_date_time")
+                                    if (col.ColumnName == "settlement_id")
+                                    { 
+                                        if(!settlement_idList.Contains(row["settlement_id"].ToString()))
+                                            settlement_idList.Add(row["settlement_id"].ToString());
+                                        rowSettlemnetData[col.ColumnName] = row["settlement_id"].ToString();
+                                    }
+                                    else if (col.ColumnName == "posted_date_time")
                                     {
                                         if (!string.IsNullOrEmpty(row[col.ColumnName].ToString()))
                                         {
@@ -400,9 +484,7 @@ namespace MWSServer
             {
                 DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "GetTransactionData() exception message:" + ex.Message);
             }
-
-            Thread.Sleep(1000 * 60 * UPDATE_ESTIMATED_FBA_FEE_PERIOD);
-
+            return settlement_idList;
         }
 
         private void GetFBA_EstimatedFeeData(MWSUserProfile profile)

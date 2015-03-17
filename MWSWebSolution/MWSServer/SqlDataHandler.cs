@@ -59,7 +59,7 @@ namespace MWSServer
             return profileList;
         }
 
-        public int UpdateInventoryCostHistory()
+        public int UpdateInventoryCostHistory(string sMerchantID)
         {
             int result = -1;
             using (SqlConnection con = new SqlConnection(_connectionString))
@@ -69,6 +69,26 @@ namespace MWSServer
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@STARTDATE", new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day - 1, 23, 59, 59));
                     cmd.Parameters.AddWithValue("@ENDDATE", new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day, 23, 59, 59));
+                    cmd.Parameters.AddWithValue("@MerchantID", sMerchantID);
+                    cmd.Connection = con;
+                    con.Open();
+                    result = (Int32)cmd.ExecuteScalar();
+                    con.Close();
+                }
+            }
+            return result;
+        }
+
+        public int UpdateInventoryCostHistoryManual(string sMerchantID,DateTime inputDate)
+        {
+            int result = -1;
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand("UpdateInventoryCostHistoryByManual"))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@MerchantID", sMerchantID);
+                    cmd.Parameters.AddWithValue("@INPUTDATE", inputDate);
                     cmd.Connection = con;
                     con.Open();
                     result = (Int32)cmd.ExecuteScalar();
@@ -96,7 +116,46 @@ namespace MWSServer
             return sCurrencyID;
         }
 
-        public int UpdateNetProfitData(DateTime startDate, DateTime endDate)
+        public List<DateTime> GetRawSettlementDataPostedDate(string sMerchantID,string sSettlementID)
+        {
+            List<DateTime> postedDateList = new List<DateTime>();
+            SqlCommand cmd;
+            string query;
+
+            cmd = new SqlCommand("GetSettlementDataPostedDateBySettlementID");
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@settlement_id", sSettlementID);
+            cmd.Parameters.AddWithValue("@MerchantID", sMerchantID);
+            DataTable dTable = new DataTable();
+            using (SqlConnection conn = new SqlConnection(_connectionString))
+            {
+                using (SqlConnection con = new SqlConnection(_connectionString))
+                {
+                    using (SqlDataAdapter sda = new SqlDataAdapter())
+                    {
+                        cmd.Connection = conn;
+                        sda.SelectCommand = cmd;
+                        using (DataSet ds = new DataSet())
+                        {
+                            sda.Fill(dTable);
+                        }
+                    }
+                }
+            }
+
+            foreach (DataRow row in dTable.Rows)
+            {
+                string posted_date = row["posted_date"].ToString();
+                DateTime postDateTime = new DateTime();
+                postDateTime = DateTime.Parse(posted_date);
+                postedDateList.Add(postDateTime);
+            }
+
+
+            return postedDateList;
+        }
+
+        public int UpdateNetProfitData(string sMerchantID,DateTime startDate, DateTime endDate)
         {
             int iResult = -1;
             using (SqlConnection con = new SqlConnection(_connectionString))
@@ -104,11 +163,14 @@ namespace MWSServer
                 using (SqlCommand cmd = new SqlCommand("UpdateNetProfitData"))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@StartDate", startDate);
-                    cmd.Parameters.AddWithValue("@EndDate", endDate);
+                    object startDateObj = startDate;
+                    object endDateObj = endDate;
+                    cmd.Parameters.AddWithValue("@MERCHANT_ID", sMerchantID);
+                    cmd.Parameters.AddWithValue("@STARTDATE", startDateObj);
+                    cmd.Parameters.AddWithValue("@ENDDATE", endDateObj);
                     cmd.Connection = con;
                     con.Open();
-                    iResult = (Int32)cmd.ExecuteScalar();
+                    iResult = (int)cmd.ExecuteScalar();
                     con.Close();
                 }
             }

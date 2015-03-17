@@ -24,16 +24,30 @@
                 <DynamicSelectedStyle BackColor="#507CD1" />
                 <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
                 <Items>
-                    <asp:MenuItem Text="Product" Value="Product" NavigateUrl="~/ProductList.aspx"></asp:MenuItem>
+                    <asp:MenuItem Text="Sales" Value="Sales">
+                        <asp:MenuItem NavigateUrl="~/NetProfitSimPage.aspx" Text="NetProfitSim" 
+                            Value="NetProfitSim"></asp:MenuItem>
+                    </asp:MenuItem>
+                    <asp:MenuItem Text="Shipment" Value="Shipment"></asp:MenuItem>
                     <asp:MenuItem Text="Reports" Value="Reports" NavigateUrl="~/Main.aspx">
-                        <asp:MenuItem NavigateUrl="~/Reports/TotalCurrentInventory.aspx" 
+                        <asp:MenuItem NavigateUrl="~/TotalCurrentInventory.aspx" 
                             Text="Total Current Inventory Value" Value="Total Current Inventory Value">
                         </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Reports/DailyNetProfit.aspx" 
+                    </asp:MenuItem>
+                    <asp:MenuItem Text="Accounting" Value="Accounting">
+                        <asp:MenuItem NavigateUrl="~/YearlyNetProfit.aspx" 
+                            Text="Yearly Net Profit Report" Value="Yearly Net Profit Report">
+                        </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/DailyNetProfit.aspx" 
                             Text="Daily Net Profit Report" Value="Daily Net Profit Report">
                         </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/MonthlyNetProfit.aspx" 
+                            Text="Monthly Net Profit Report" Value="Monthly Net Profit Report">
+                        </asp:MenuItem>
                     </asp:MenuItem>
-                    <asp:MenuItem Text="Logout" Value="Logout"></asp:MenuItem>
+                    <asp:MenuItem Text="Setting" Value="Setting"></asp:MenuItem>
+                    <asp:MenuItem Text="Product" Value="Product" NavigateUrl="~/ProductList.aspx"></asp:MenuItem>
+                    <asp:MenuItem Text="Logoff" Value="Logoff"></asp:MenuItem>
                 </Items>
                 <StaticHoverStyle BackColor="#284E98" ForeColor="White" />
             </asp:Menu>

@@ -251,7 +251,7 @@ namespace MWSServer
                 DebugLogHandler.DebugLogHandler.WriteLog(sLogPath, sClass, "GetScheduledReport() Report number in report list:" + reportListInfo.Count);
                 foreach (ReportInfo info in reportListInfo)
                 {
-                    // if (info.ReportType == sReportType && info.Acknowledged == false)
+                     //if (info.ReportType == sReportType && info.Acknowledged == false)
                     if (info.ReportType == sReportType)
                     {
 
