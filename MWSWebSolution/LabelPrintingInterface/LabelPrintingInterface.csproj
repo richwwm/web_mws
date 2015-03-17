@@ -15,7 +15,8 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <TargetFrameworkProfile />
-    <SilverlightApplicationList>{A28FC02D-CFDC-4DA2-A67B-65FFC4E3A028}|..\SilverlightPrinting\SilverlightPrinting.csproj|ClientBin|False,{297912E3-DB32-47DA-9FC8-1E5BABCD64B1}|..\SilverlightPrinting\SilverlightPrinting.csproj|ClientBin|False</SilverlightApplicationList>
+    <SilverlightApplicationList>
+    </SilverlightApplicationList>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,7 +65,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ClientBin\SilverlightPrinting.xap" />
     <Content Include="Global.asax" />
     <Content Include="Images\addToPrint.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -86,19 +86,9 @@
     </Content>
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
+    <Content Include="Reports\MonthlyNetProfit.aspx" />
+    <Content Include="Reports\DailyNetProfit.aspx" />
     <Content Include="Reports\TotalCurrentInventory.aspx" />
-    <None Include="Service References\ServiceReference1\Arrays1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\configuration91.svcinfo" />
-    <None Include="Service References\ServiceReference1\configuration.svcinfo" />
-    <None Include="Service References\ServiceReference1\LabelPrintingInterface.ServiceReference1.CompositeType.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ServiceReference1\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="style\print.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -110,18 +100,12 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="ProductList.aspx" />
-    <None Include="Service References\ServiceReference1\service1.wsdl" />
-    <None Include="Service References\ServiceReference1\service2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\service21.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference1\WcfServiceLibrary11.xsd">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AmazonAccountDataSource.cs" />
+    <Compile Include="DownloadFile.ashx.cs">
+      <DependentUpon>DownloadFile.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -153,37 +137,23 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Reports\MonthlyNetProfit.aspx.cs">
+      <DependentUpon>MonthlyNetProfit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\MonthlyNetProfit.aspx.designer.cs">
+      <DependentUpon>MonthlyNetProfit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DailyNetProfit.aspx.cs">
+      <DependentUpon>DailyNetProfit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\DailyNetProfit.aspx.designer.cs">
+      <DependentUpon>DailyNetProfit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\NetProfitDataSource.cs" />
+    <Compile Include="Reports\ReportCommon.cs" />
     <Compile Include="Reports\ReportHandler.cs" />
-    <Compile Include="Reports\edwin report 4.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>edwin report 4.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\edwin report 4a.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>edwin report 4a.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\QuoteReportWithImage.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>QuoteReportWithImage.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\salesorderreport%281%29.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>salesorderreport%281%29.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\salesorderreport%282%29.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>salesorderreport%282%29.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports\TotalCurrentInventory.aspx.cs">
       <DependentUpon>TotalCurrentInventory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -191,11 +161,7 @@
     <Compile Include="Reports\TotalCurrentInventory.aspx.designer.cs">
       <DependentUpon>TotalCurrentInventory.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Service References\ServiceReference1\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -223,28 +189,7 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\edwin report 4.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>edwin report 4.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\edwin report 4a.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>edwin report 4a.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\QuoteReportWithImage.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>QuoteReportWithImage.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\salesorderreport%281%29.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>salesorderreport%281%29.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\salesorderreport%282%29.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>salesorderreport%282%29.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="DownloadFile.ashx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

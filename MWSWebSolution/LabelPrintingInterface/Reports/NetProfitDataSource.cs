@@ -108,6 +108,18 @@ namespace LabelPrintingInterface
             return ds;
         }
 
+        public DataSet GetMonthPeriodInNetProfitDataByMerchantID(string sMerchantID)
+        {
+            DataSet ds = new DataSet();
+            if (!string.IsNullOrEmpty(sMerchantID))
+            {
+                SqlParameter merchantIDParameter = new SqlParameter("@MERCHANT_ID", sMerchantID);
+                SqlParameter[] paramterCollection = { merchantIDParameter };
+                ds = NetProfitReport.GetDataByStoredProcedure("GetMonthPeriodInNetProfitData", paramterCollection);
+            }
+            return ds;
+        }
+
         public DataSet GetDataByCriteria(string parameter, string value)
         {
             //string query = "SELECT [MWS].[dbo].[ProductAvailability].[FNSKU] AS " + '"' + "FNSKU" + '"'
