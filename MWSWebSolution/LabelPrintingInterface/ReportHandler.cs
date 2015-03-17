@@ -26,9 +26,12 @@ namespace LabelPrintingInterface
                 using (SqlCommand cmd = new SqlCommand(sStoredProcedureName))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    foreach (SqlParameter para in paraCollection)
+                    if (paraCollection != null)
                     {
-                        cmd.Parameters.Add(para);
+                        foreach (SqlParameter para in paraCollection)
+                        {
+                            cmd.Parameters.Add(para);
+                        }
                     }
                     cmd.Connection = con;
                     con.Open();
