@@ -29,11 +29,11 @@
             <asp:SessionParameter Name="sUserID" SessionField="UserID" Type="String" />
         </SelectParameters>
     </asp:ObjectDataSource>
-    <asp:Label Text="Viewing Amazon account:" runat="server" 
+        <asp:Label Text="Viewing Amazon account:" runat="server" 
         Style="font-weight: 700" ID="Label5" />
-    <asp:DropDownList ID="DropDownList1" runat="server" Height="17px" Width="193px" DataSourceID="AmazonAccountDataSource"
-        AutoPostBack="True" DataTextField="description" DataValueField="MerchantID" OnTextChanged="DropDownList1_TextChanged">
-    </asp:DropDownList>
+        <asp:DropDownList ID="DropDownList1" runat="server" Height="17px" Width="193px" DataSourceID="AmazonAccountDataSource"
+            AutoPostBack="True" DataTextField="description" DataValueField="MerchantID" OnTextChanged="DropDownList1_TextChanged">
+        </asp:DropDownList>
     <asp:HiddenField runat="server" ID="_repostcheckcode" />
     <asp:ListView ID="ListView1" runat="server" DataSourceID="ObjectDataSource1" 
         OnItemCommand="ListView1_ItemCommand1" onsorting="ListView1_Sorting" 

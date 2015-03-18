@@ -137,7 +137,6 @@ namespace LabelPrintingInterface
             return ds;
         }
 
-<<<<<<< HEAD:MWSWebSolution/LabelPrintingInterface/NetProfitDataSource.cs
         public DataSet GetMonthPeriodInNetProfitDataByMerchantID(string sMerchantID,int iYear)
         {
             DataSet ds = new DataSet();
@@ -159,20 +158,13 @@ namespace LabelPrintingInterface
         }
 
         public DataSet GetYearPeriodInNetProfitDataByMerchantID(string sMerchantID)
-=======
-        public DataSet GetMonthPeriodInNetProfitDataByMerchantID(string sMerchantID)
->>>>>>> 126fdc48040c5d658d70ed204bcb411c18141930:MWSWebSolution/LabelPrintingInterface/Reports/NetProfitDataSource.cs
         {
             DataSet ds = new DataSet();
             if (!string.IsNullOrEmpty(sMerchantID))
             {
                 SqlParameter merchantIDParameter = new SqlParameter("@MERCHANT_ID", sMerchantID);
                 SqlParameter[] paramterCollection = { merchantIDParameter };
-<<<<<<< HEAD:MWSWebSolution/LabelPrintingInterface/NetProfitDataSource.cs
                 ds = NetProfitReport.GetDataByStoredProcedure("GetYearPeriodInNetProfitData", paramterCollection);
-=======
-                ds = NetProfitReport.GetDataByStoredProcedure("GetMonthPeriodInNetProfitData", paramterCollection);
->>>>>>> 126fdc48040c5d658d70ed204bcb411c18141930:MWSWebSolution/LabelPrintingInterface/Reports/NetProfitDataSource.cs
             }
             return ds;
         }

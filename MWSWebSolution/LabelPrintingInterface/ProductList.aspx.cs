@@ -11,7 +11,6 @@ using LabelPrintingInterface.DataSource;
 using DebugLogHandler;
 using MWS.Lib;
 using System.Web.Security;
-
 namespace LabelPrintingInterface
 {
     public partial class ProductList : System.Web.UI.Page
@@ -20,15 +19,6 @@ namespace LabelPrintingInterface
         DataTable LabelTable = null;
         string sClass = "ProductList";
         string sLogPath = HttpContext.Current.Server.MapPath("~");
-
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            //  CancelUnexpectedRePost();
-            if (Session["UserID"] == "" || Session["UserID"] == null)
-            {
-                FormsAuthentication.RedirectToLoginPage();
-            }
-        }
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -56,6 +46,7 @@ namespace LabelPrintingInterface
             }
 
         }
+
 
         private void InitPrintList()
         {
@@ -138,6 +129,15 @@ namespace LabelPrintingInterface
             }
         }
 
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            //  CancelUnexpectedRePost();
+            if (Session["UserID"] == "" || Session["UserID"] == null)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+            }
+        }
+
         private void UpdateCurrentQuantity2PrintList(ListView currentList)
         {
             DataSet tempDataSet = new DataSet();
@@ -185,21 +185,10 @@ namespace LabelPrintingInterface
 
         protected void PrintAllButton_Click(object sender, EventArgs e)
         {
-            UpdateCurrentQuantity2PrintList(this.LabelPrintList);
-            UpdatePrintListSource();
-
-            if (Session["LabelPrintDataSet"] != null)
-            {
-                DataSet tempDataSet = (DataSet)Session["LabelPrintDataSet"];
-                DataTable tempTable = tempDataSet.Tables[0];
-                
-                PrintJob pj = new PrintJob();
-                pj.AddPrintJobByTable(tempTable);
-
-                ClearPrintList();
-                UpdatePrintListSource();
-                this.Label4.Visible = false;
-            }
+           //string sClientIP =  GetClientIP();
+           //if (sClientIP == "::1")
+           //    sClientIP = "127.0.0.1";
+           //BeginGetAsyncData(sClientIP);
         }
 
 

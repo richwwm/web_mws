@@ -24,19 +24,11 @@
                 <DynamicSelectedStyle BackColor="#507CD1" />
                 <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
                 <Items>
-<<<<<<< HEAD
                     <asp:MenuItem Text="Sales" Value="Sales">
                         <asp:MenuItem NavigateUrl="~/NetProfitSimPage.aspx" Text="NetProfitSim" 
                             Value="NetProfitSim"></asp:MenuItem>
                     </asp:MenuItem>
                     <asp:MenuItem Text="Shipment" Value="Shipment"></asp:MenuItem>
-=======
-                    <asp:MenuItem Text="Product" Value="Product" NavigateUrl="~/ProductList.aspx">
-                        <asp:MenuItem NavigateUrl="~/DownloadFile.ashx" 
-                            Text="Label Print Service Installer">
-                        </asp:MenuItem>
-                    </asp:MenuItem>
->>>>>>> 126fdc48040c5d658d70ed204bcb411c18141930
                     <asp:MenuItem Text="Reports" Value="Reports" NavigateUrl="~/Main.aspx">
                         <asp:MenuItem NavigateUrl="~/TotalCurrentInventory.aspx" 
                             Text="Total Current Inventory Value" Value="Total Current Inventory Value">
@@ -61,11 +53,6 @@
             </asp:Menu>
         </h5>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
-    </div>
-    <div align="center">
-        <asp:ContentPlaceHolder ID="footer" runat="server">
-            <asp:Label ID="ClientInfoLabel" runat="Server" Text='' />
         </asp:ContentPlaceHolder>
     </div>
     </form>
