@@ -1,5 +1,0 @@
-D:\Richard\GitHub\web_mws\MWSWebSolution\DebugLogHandler\bin\Debug\DebugLogHandler.dll
-D:\Richard\GitHub\web_mws\MWSWebSolution\DebugLogHandler\bin\Debug\DebugLogHandler.pdb
-D:\Richard\GitHub\web_mws\MWSWebSolution\DebugLogHandler\obj\Debug\DebugLogHandler.dll
-D:\Richard\GitHub\web_mws\MWSWebSolution\DebugLogHandler\obj\Debug\DebugLogHandler.pdb
-D:\Richard\GitHub\web_mws\MWSWebSolution\DebugLogHandler\obj\Debug\DebugLogHandler.csprojResolveAssemblyReference.cache

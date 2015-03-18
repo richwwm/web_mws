@@ -90,6 +90,9 @@
     <Content Include="MonthlyNetProfit.aspx" />
     <Content Include="NetProfitSimPage.aspx" />
     <Content Include="NetProfitSummary.aspx" />
+    <Content Include="Reports\MonthlyNetProfit.aspx" />
+    <Content Include="Reports\DailyNetProfit.aspx" />
+    <Content Include="Reports\TotalCurrentInventory.aspx" />
     <Content Include="style\print.css" />
     <Content Include="TotalCurrentInventory.aspx" />
     <Content Include="Web.config">
@@ -113,6 +116,11 @@
     </Compile>
     <Compile Include="DailyNetProfit.aspx.designer.cs">
       <DependentUpon>DailyNetProfit.aspx</DependentUpon>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AmazonAccountDataSource.cs" />
+    <Compile Include="DownloadFile.ashx.cs">
+      <DependentUpon>DownloadFile.ashx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -178,6 +186,24 @@
     </Compile>
     <Compile Include="SqlDataHandler.cs" />
     <Compile Include="TotalCurrentInventory.aspx.cs">
+    <Compile Include="Reports\MonthlyNetProfit.aspx.cs">
+      <DependentUpon>MonthlyNetProfit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\MonthlyNetProfit.aspx.designer.cs">
+      <DependentUpon>MonthlyNetProfit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DailyNetProfit.aspx.cs">
+      <DependentUpon>DailyNetProfit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\DailyNetProfit.aspx.designer.cs">
+      <DependentUpon>DailyNetProfit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\NetProfitDataSource.cs" />
+    <Compile Include="Reports\ReportCommon.cs" />
+    <Compile Include="Reports\ReportHandler.cs" />
+    <Compile Include="Reports\TotalCurrentInventory.aspx.cs">
       <DependentUpon>TotalCurrentInventory.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -187,6 +213,9 @@
     <Compile Include="TotalCurrentInventoryDataSource.cs" />
     <Compile Include="YearlyNetProfit.aspx.cs">
       <DependentUpon>YearlyNetProfit.aspx</DependentUpon>
+    <Compile Include="Settings.cs" />
+    <Compile Include="Site1.Master.cs">
+      <DependentUpon>Site1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="YearlyNetProfit.aspx.designer.cs">
@@ -210,6 +239,7 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DownloadFile.ashx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

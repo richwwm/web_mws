@@ -1,4 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <publishData>
+<<<<<<< HEAD
   <publishProfile publishUrl="http://192.168.103.150" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="mws" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="True" msdeployMarkAsApp="False" profileName="Profile1" publishMethod="MSDeploy" replaceMatchingFiles="True" userName="administrator" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAOfPMOgu5TUmRXzX1Jv3zswAAAAACAAAAAAADZgAAwAAAABAAAABrxGCMsJwUqc4Lj3dapbEdAAAAAASAAACgAAAAEAAAAFMXRdrzPVqthplYn0grYfoYAAAAJmicxaflB2xEiTQPlvJ6OqLGapOSyNijFAAAAHRZMhOPF2Bz8fhiqPSyPqb4pGhI" SelectedForPublish="True" />
+=======
+  <publishProfile publishUrl="http://192.168.103.150" deleteExistingFiles="False" ftpAnonymousLogin="False" ftpPassiveMode="True" msdeploySite="mws_preview" msdeploySiteID="" msdeployRemoteSitePhysicalPath="" msdeployAllowUntrustedCertificate="False" msdeploySkipExtraFilesOnServer="False" msdeployMarkAsApp="True" profileName="Preview" publishMethod="MSDeploy" replaceMatchingFiles="True" userName="administrator" savePWD="True" userPWD="AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAlC5IsIjdik2aRJyYlrP1cgAAAAACAAAAAAAQZgAAAAEAACAAAAC7IfycgEFPlEK44zr+KTXBm7u7VY0wvWAZeBrQfAxxFgAAAAAOgAAAAAIAACAAAACnMgHGlzw3c8IP/26EhEvaBZfExyetcOQ8/8DpvtXeYSAAAADAmreC9yfT7jBaIgykmwPDGdJADxABT9RjLmjQi5fEqUAAAAB6w5qfi4Yz1MUffR45u3NpGu2x3Eav0vmR20ghVDpwiYQEErFd0NYCHsp8/IJ81XZNLuX8yIyuvkJZaOjSzZwb" SelectedForPublish="True" />
+>>>>>>> 126fdc48040c5d658d70ed204bcb411c18141930
 </publishData>
