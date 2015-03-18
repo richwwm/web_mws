@@ -19,6 +19,25 @@ namespace MWS.Lib
             _connectionString = sConnectionString;
         }
 
+        public DataSet GetUserIDPagePermission(string sUserID)
+        {
+            SqlCommand cmd = new SqlCommand("GetUserPermittedPage");
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@UserID", sUserID);
+            using (SqlConnection con = new SqlConnection(_connectionString))
+            {
+                using (SqlDataAdapter sda = new SqlDataAdapter())
+                {
+                    cmd.Connection = con;
+                    sda.SelectCommand = cmd;
+                    using (DataSet ds = new DataSet())
+                    {
+                        sda.Fill(ds);
+                        return ds;
+                    }
+                }
+            }
+        }
         public string GetMerchantIDByUserID(string sUserID)
         {
             string constr = _connectionString;

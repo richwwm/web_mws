@@ -26,10 +26,6 @@
           </StartWorkingDirectory>
           <EnableENC>False</EnableENC>
           <AlwaysStartWebServerOnDebug>True</AlwaysStartWebServerOnDebug>
-          <ProjectOutputReferences>
-            <Ref Project="{A28FC02D-CFDC-4DA2-A67B-65FFC4E3A028}" Folder="ClientBin">SilverlightPrinting.xap</Ref>
-            <Ref Project="{297912E3-DB32-47DA-9FC8-1E5BABCD64B1}" Folder="ClientBin">SilverlightPrinting.xap</Ref>
-          </ProjectOutputReferences>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

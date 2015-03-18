@@ -16,7 +16,9 @@ namespace LabelPrintingInterface
         {
             Menu masteMenu = Master.FindControl("Menu1") as Menu;
             masteMenu.Visible = false;
-            Session["MerchantID"] = "";
+            Session["UserID"] = "";
+            Response.Cookies.Clear();
+            Session.Abandon();
         }
 
         protected void LoginButton_Click(object sender, EventArgs e)
@@ -49,13 +51,14 @@ namespace LabelPrintingInterface
                 {
                     case -1:
                         Login1.FailureText = "Username and/or password is incorrect.";
+                        Session["UserID"] = "";
                         break;
                     case -2:
                         Login1.FailureText = "Account has not been activated.";
+                        Session["UserID"] = "";
                         break;
                     default:
                         string userData = userId.ToString();
-
                         FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1,
                           userId.ToString(),
                           DateTime.Now,
@@ -63,7 +66,7 @@ namespace LabelPrintingInterface
                           Login1.RememberMeSet,
                           userData,
                           FormsAuthentication.FormsCookiePath);
-
+                        Session["UserID"] = userData;
                         // Encrypt the ticket.
                         string encTicket = FormsAuthentication.Encrypt(ticket);
 
@@ -71,7 +74,8 @@ namespace LabelPrintingInterface
                         Response.Cookies.Add(new HttpCookie(FormsAuthentication.FormsCookieName, encTicket));
 
                         // Redirect back to original URL.
-                        FormsAuthentication.RedirectFromLoginPage(userId.ToString(), Login1.RememberMeSet);
+                        Response.Redirect("~/Main.aspx");
+                       // FormsAuthentication.RedirectFromLoginPage(userId.ToString(), Login1.RememberMeSet);
                         break;
                 }
             }

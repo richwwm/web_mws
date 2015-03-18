@@ -293,15 +293,18 @@ namespace LabelPrintingInterface
         {
             string sCommandType = e.CommandName.ToString();
             string sFNSKU = e.CommandArgument.ToString();
-            DataSet tempDataSet = (DataSet)Session["LabelPrintDataSet"];
-            if (sCommandType == "DeleteItem")
+            if (Session["LabelPrintDataSet"]!= null)
             {
-                DataRow[] rowToDel = tempDataSet.Tables[0].Select("FNSKU = " + "'" + sFNSKU + "'");
-                foreach (DataRow row in rowToDel)
+                DataSet tempDataSet = (DataSet)Session["LabelPrintDataSet"];
+                if (sCommandType == "DeleteItem")
                 {
-                    tempDataSet.Tables[0].Rows.Remove(row);
+                    DataRow[] rowToDel = tempDataSet.Tables[0].Select("FNSKU = " + "'" + sFNSKU + "'");
+                    foreach (DataRow row in rowToDel)
+                    {
+                        tempDataSet.Tables[0].Rows.Remove(row);
+                    }
+                    UpdatePrintListSource();
                 }
-                UpdatePrintListSource();
             }
         }
 
